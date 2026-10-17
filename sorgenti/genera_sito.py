@@ -11,13 +11,13 @@ VERSIONE = "1.1"
 # Link di donazione (lasciare vuoto finche' non sono pronti: il pulsante mostra "a breve"). Esempi: "https://paypal.me/NOME", "https://revolut.me/NOME"
 DONA = {"PayPal": "https://paypal.me/IDQdeveloper", "Revolut": "https://revolut.me/paolox0hv"}
 # (chiave testo sistema, chiave nota, file, icona)
-FILE = [   # (chiave etichetta, icona, file; None = popup "presto su Google Play")
+FILE = [   # (chiave etichetta, icona, file[, sottotitolo]; l'icona Android apre il popup con il download)
  ("per_win", "win", f"downloads/{VERSIONE}/IDQ-Monitor-User-Setup-Windows.exe"),
  ("per_linux", "linux", f"downloads/{VERSIONE}/idq-monitor-user_{VERSIONE}_amd64.deb"),
  ("per_rpi", "rpi", f"downloads/{VERSIONE}/idq-monitor-user_{VERSIONE}_arm64.deb", "sub_rpi"),
  ("per_mac1", "mac", f"downloads/{VERSIONE}/IDQ-Monitor-User-macOS-arm64.zip"),
  ("per_mac2", "mac", f"downloads/{VERSIONE}/IDQ-Monitor-User-macOS-x64.zip"),
- ("per_android", "android", None),
+ ("per_android", "android", f"downloads/{VERSIONE}/IDQ-Monitor-User-{VERSIONE}.apk", "android"),
  ("per_ios", "ios", f"downloads/{VERSIONE}/IDQ-Monitor-User-iOS-non-firmato.ipa"),
  ("per_srv", "srv", "downloads/idq-monitor-server.zip", "sub_srv"),
 ]
@@ -69,7 +69,7 @@ var l=q||s||(navigator.language||"it").slice(0,2).toLowerCase();if(ok.indexOf(l)
 function imposta(x){document.documentElement.setAttribute("data-l",x);document.documentElement.lang=x;document.querySelectorAll(".lingue button").forEach(function(b){b.classList.toggle("on",b.dataset.l==x)});try{localStorage.setItem("l",x)}catch(e){}
 var t=document.querySelector("title");var k=t&&t.dataset["t"+x];if(k)document.title=k;document.querySelectorAll("a[data-g]").forEach(function(a){a.href=a.dataset.g+"?l="+x})}
 document.querySelectorAll(".lingue button").forEach(function(b){b.onclick=function(){imposta(b.dataset.l)}});imposta(l);
-var pa=document.getElementById("os-android"),pp=document.getElementById("pop");if(pa){pa.onclick=function(e){e.preventDefault();pp.classList.add("on")};document.getElementById("pop-ok").onclick=function(){pp.classList.remove("on")};pp.onclick=function(e){if(e.target===pp)pp.classList.remove("on")}}
+var pa=document.getElementById("os-android"),pp=document.getElementById("pop");if(pa){pa.onclick=function(e){e.preventDefault();pp.classList.add("on")};document.getElementById("pop-ok").onclick=function(){pp.classList.remove("on")};document.getElementById("pop-dl").onclick=function(){setTimeout(function(){pp.classList.remove("on")},300)};pp.onclick=function(e){if(e.target===pp)pp.classList.remove("on")}}
 document.querySelectorAll(".dona a").forEach(function(d){if(d.getAttribute("href")!=="#")return;d.onclick=function(e){e.preventDefault();var m={it:%s,en:%s,fr:%s,de:%s,es:%s};document.getElementById("dmsg").textContent=m[document.documentElement.lang]||m.en}})})();"""
 def testa(titolo_chiave, extra=""):
     titoli = " ".join('data-t%s="%s"' % (l, html.escape(T[titolo_chiave][i])) for i, (l, _) in enumerate(LING))
@@ -93,11 +93,11 @@ def indice():
     h += '<h2 id="download">%s</h2><p class="mu">%s · %s %s</p>' % (L("h_download"), L("d_intro"), L("d_versione"), VERSIONE)
     h += '<div class="os-grid">'
     for voce in FILE:
-        chiave, icona, percorso = voce[:3]; sub = ('<small class="sub">%s</small>' % L(voce[3])) if len(voce) > 3 else ''
-        if percorso is None: h += '<a class="os" href="#" id="os-android">%s<span class="et">%s</span><small>Google Play</small></a>' % (ICONE[icona], L(chiave))
+        chiave, icona, percorso = voce[:3]; sub = ('<small class="sub">%s</small>' % L(voce[3])) if len(voce) > 3 and voce[3] != 'android' else ''
+        if voce[-1] == "android" and len(voce) > 3: h += '<a class="os" href="#" id="os-android">%s<span class="et">%s</span><small>%s</small></a>' % (ICONE[icona], L(chiave), mb(percorso)); apk = percorso
         else: h += '<a class="os" href="%s" download="%s">%s<span class="et">%s</span>%s<small>%s</small></a>' % (percorso, os.path.basename(percorso), ICONE[icona], L(chiave), sub, mb(percorso))
     h += '</div><details class="note"><summary>%s</summary>%s</details>' % (L("note_inst"), "".join('<p><b>%s</b>: %s</p>' % (L(c), L(n)) for c, n in (("per_win", "n_win"), ("per_linux", "n_deb"), ("per_rpi", "n_rpi"), ("per_mac1", "n_mac"), ("per_ios", "n_ios"), ("per_srv", "n_srv"))))
-    h += '<div class="pop" id="pop"><div class="box"><b>%s</b><p>%s</p><button id="pop-ok" type="button">%s</button></div></div>' % (L("pop_t"), L("pop_m"), L("pop_ok"))
+    h += '<div class="pop" id="pop"><div class="box"><b>%s</b><p>%s</p><p><a class="btn" href="%s" download="%s" id="pop-dl">%s</a></p><button id="pop-ok" type="button">%s</button></div></div>' % (L("pop_t"), L("pop_m"), apk, os.path.basename(apk), L("pop_dl"), L("pop_ok"))
     h += '<h2 id="prova">%s</h2><p>%s</p><h2>%s</h2><p>%s</p><p><a class="btn" data-g="guida.html" href="guida.html">%s</a></p>' % (L("h_prova"), L("p_prova"), L("h_server"), L("p_server"), L("cta_guida"))
     bt = "".join('<a id="dona-%s" href="%s"%s>%s</a> ' % (n.lower(), html.escape(u) if u else "#", ' target="_blank" rel="noopener"' if u else "", n) for n, u in DONA.items())
     h += '<h2 id="dona">%s</h2><div class="dona"><p>%s</p><p><b>%s</b></p>%s<div id="dmsg"></div></div>' % (L("h_dona"), L("p_dona"), L("b_dona"), bt)

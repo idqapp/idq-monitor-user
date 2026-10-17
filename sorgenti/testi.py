@@ -75,3 +75,10 @@ T.update({
 "sub_rpi": ("Pi 5, 4, 400, 3, 3+, Zero 2 W (sistema a 64 bit)", "Pi 5, 4, 400, 3, 3+, Zero 2 W (64-bit system)", "Pi 5, 4, 400, 3, 3+, Zero 2 W (système 64 bits)", "Pi 5, 4, 400, 3, 3+, Zero 2 W (64-Bit-System)", "Pi 5, 4, 400, 3, 3+, Zero 2 W (sistema de 64 bits)"),
 "sub_srv": ("Per avere il tuo server: da installare su un computer Linux sempre acceso (serve dopo la prova di 24 ore)", "To run your own server: install it on an always-on Linux computer (needed after the 24-hour trial)", "Pour avoir votre serveur : à installer sur un ordinateur Linux toujours allumé (nécessaire après l'essai de 24 h)", "Für deinen eigenen Server: auf einem ständig laufenden Linux-Computer installieren (nötig nach dem 24-Stunden-Test)", "Para tener tu servidor: instálalo en un ordenador Linux siempre encendido (hace falta tras la prueba de 24 horas)"),
 })
+
+T.update({
+"pop_t": ("Presto anche su Google Play", "Coming soon to Google Play too", "Bientôt aussi sur Google Play", "Bald auch bei Google Play", "Pronto también en Google Play"),
+"pop_m": ("L'app per Android sarà presto disponibile anche su Google Play. Intanto, essendo gratuita, puoi scaricarla subito da qui.", "The Android app will soon be on Google Play too. In the meantime, since it's free, you can download it right here.", "L'application Android sera bientôt aussi sur Google Play. En attendant, comme elle est gratuite, vous pouvez la télécharger ici.", "Die Android-App gibt es bald auch bei Google Play. Bis dahin kannst du sie, da sie kostenlos ist, gleich hier herunterladen.", "La app para Android estará pronto también en Google Play. Mientras tanto, al ser gratuita, puedes descargarla aquí mismo."),
+"pop_dl": ("Scarica ora", "Download now", "Télécharger maintenant", "Jetzt herunterladen", "Descargar ahora"),
+"pop_ok": ("Chiudi", "Close", "Fermer", "Schließen", "Cerrar"),
+})
