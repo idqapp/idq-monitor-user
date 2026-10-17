@@ -69,7 +69,9 @@ var l=q||s||(navigator.language||"it").slice(0,2).toLowerCase();if(ok.indexOf(l)
 function imposta(x){document.documentElement.setAttribute("data-l",x);document.documentElement.lang=x;document.querySelectorAll(".lingue button").forEach(function(b){b.classList.toggle("on",b.dataset.l==x)});try{localStorage.setItem("l",x)}catch(e){}
 var t=document.querySelector("title");var k=t&&t.dataset["t"+x];if(k)document.title=k;document.querySelectorAll("a[data-g]").forEach(function(a){a.href=a.dataset.g+"?l="+x})}
 document.querySelectorAll(".lingue button").forEach(function(b){b.onclick=function(){imposta(b.dataset.l)}});imposta(l);
-var pa=document.getElementById("os-android"),pp=document.getElementById("pop");if(pa){pa.onclick=function(e){e.preventDefault();pp.classList.add("on")};document.getElementById("pop-ok").onclick=function(){pp.classList.remove("on")};document.getElementById("pop-dl").onclick=function(){setTimeout(function(){pp.classList.remove("on")},300)};pp.onclick=function(e){if(e.target===pp)pp.classList.remove("on")}}
+var pp=document.getElementById("pop"),pend=null;function scarica(){if(!pend)return;var a=document.createElement("a");a.href=pend.href;a.download=pend.download;document.body.appendChild(a);a.click();a.remove();pend=null;pp.classList.remove("on")}
+document.querySelectorAll("a.os").forEach(function(o){o.onclick=function(e){e.preventDefault();pend={href:o.getAttribute("href"),download:o.getAttribute("download")};pp.querySelector(".and").style.display=o.dataset.and?"block":"none";pp.classList.add("on")}});
+document.getElementById("pop-ok").onclick=scarica;pp.querySelectorAll(".dn").forEach(function(d){d.addEventListener("click",function(){setTimeout(scarica,200)})});pp.onclick=function(e){if(e.target===pp){pend=null;pp.classList.remove("on")}}
 document.querySelectorAll(".dona a").forEach(function(d){if(d.getAttribute("href")!=="#")return;d.onclick=function(e){e.preventDefault();var m={it:%s,en:%s,fr:%s,de:%s,es:%s};document.getElementById("dmsg").textContent=m[document.documentElement.lang]||m.en}})})();"""
 def testa(titolo_chiave, extra=""):
     titoli = " ".join('data-t%s="%s"' % (l, html.escape(T[titolo_chiave][i])) for i, (l, _) in enumerate(LING))
@@ -94,10 +96,11 @@ def indice():
     h += '<div class="os-grid">'
     for voce in FILE:
         chiave, icona, percorso = voce[:3]; sub = ('<small class="sub">%s</small>' % L(voce[3])) if len(voce) > 3 and voce[3] != 'android' else ''
-        if voce[-1] == "android" and len(voce) > 3: h += '<a class="os" href="#" id="os-android">%s<span class="et">%s</span><small>%s</small></a>' % (ICONE[icona], L(chiave), mb(percorso)); apk = percorso
-        else: h += '<a class="os" href="%s" download="%s">%s<span class="et">%s</span>%s<small>%s</small></a>' % (percorso, os.path.basename(percorso), ICONE[icona], L(chiave), sub, mb(percorso))
+        if False: pass
+        else: h += '<a class="os" href="%s" download="%s"%s>%s<span class="et">%s</span>%s<small>%s</small></a>' % (percorso, os.path.basename(percorso), ' data-and="1"' if icona == "android" else "", ICONE[icona], L(chiave), sub, mb(percorso))
     h += '</div><details class="note"><summary>%s</summary>%s</details>' % (L("note_inst"), "".join('<p><b>%s</b>: %s</p>' % (L(c), L(n)) for c, n in (("per_win", "n_win"), ("per_linux", "n_deb"), ("per_rpi", "n_rpi"), ("per_mac1", "n_mac"), ("per_ios", "n_ios"), ("per_srv", "n_srv"))))
-    h += '<div class="pop" id="pop"><div class="box"><b>%s</b><p>%s</p><p><a class="btn" href="%s" download="%s" id="pop-dl">%s</a></p><button id="pop-ok" type="button">%s</button></div></div>' % (L("pop_t"), L("pop_m"), apk, os.path.basename(apk), L("pop_dl"), L("pop_ok"))
+    bd = "".join('<a class="btn dn" href="%s" target="_blank" rel="noopener">%s</a> ' % (html.escape(u), n) for n, u in DONA.items() if u)
+    h += '<div class="pop" id="pop"><div class="box"><b>%s</b><p>%s</p><p class="and" style="display:none">%s</p><p><span class="mu">%s</span> %s</p><p><button id="pop-ok" type="button">%s</button></p></div></div>' % (L("don_t"), L("don_m"), L("pop_m"), L("don_con"), bd, L("don_skip"))
     h += '<h2 id="prova">%s</h2><p>%s</p><h2>%s</h2><p>%s</p><p><a class="btn" data-g="guida.html" href="guida.html">%s</a></p>' % (L("h_prova"), L("p_prova"), L("h_server"), L("p_server"), L("cta_guida"))
     bt = "".join('<a id="dona-%s" href="%s"%s>%s</a> ' % (n.lower(), html.escape(u) if u else "#", ' target="_blank" rel="noopener"' if u else "", n) for n, u in DONA.items())
     h += '<h2 id="dona">%s</h2><div class="dona"><p>%s</p><p><b>%s</b></p>%s<div id="dmsg"></div></div>' % (L("h_dona"), L("p_dona"), L("b_dona"), bt)

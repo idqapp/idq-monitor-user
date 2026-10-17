@@ -82,3 +82,10 @@ T.update({
 "pop_dl": ("Scarica ora", "Download now", "Télécharger maintenant", "Jetzt herunterladen", "Descargar ahora"),
 "pop_ok": ("Chiudi", "Close", "Fermer", "Schließen", "Cerrar"),
 })
+
+T.update({
+"don_t": ("Ti è utile? Sostieni il progetto", "Do you find it useful? Support the project", "Il vous est utile ? Soutenez le projet", "Nützlich für dich? Unterstütze das Projekt", "¿Te resulta útil? Apoya el proyecto"),
+"don_m": ("IDQ Monitor User è gratuito. Se vuoi, fai una donazione: poi il download parte da solo. Oppure continua senza donare.", "IDQ Monitor User is free. If you like, make a donation: the download then starts by itself. Or continue without donating.", "IDQ Monitor User est gratuit. Si vous le souhaitez, faites un don : le téléchargement démarre ensuite tout seul. Ou continuez sans donner.", "IDQ Monitor User ist kostenlos. Wenn du magst, spende: danach startet der Download von selbst. Oder fahre ohne Spende fort.", "IDQ Monitor User es gratuito. Si quieres, haz una donación: después la descarga empieza sola. O continúa sin donar."),
+"don_skip": ("Continua senza donare", "Continue without donating", "Continuer sans donner", "Ohne Spende fortfahren", "Continuar sin donar"),
+"don_con": ("Dona con", "Donate with", "Donner avec", "Spenden mit", "Donar con"),
+})
