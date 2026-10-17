@@ -98,6 +98,7 @@ Ottieni un indirizzo stabile del tipo <code>https://nome-pc.tuarete.ts.net</code
 <li><b>Linux, Raspberry, Mac</b>: nel Terminale (comando <code>curl … | bash</code>).</li>
 <li><b>Windows</b>: in PowerShell (comando <code>irm … | iex</code>).</li>
 </ul>
+<p><b>Permessi di amministratore:</b> l'installazione li chiede al momento (su Windows compare la finestra di conferma; su Linux e Raspberry viene chiesta la password di <code>sudo</code>). Servono per il riavvio da remoto e per leggere i consumi: viene creata solo una regola limitata, e se rifiuti il monitor funziona lo stesso.</p>
 <p>Dopo pochi secondi il computer compare in alto nell'app. Il comando installa l'agente e lo fa partire a ogni accensione. In alternativa usa gli <b>installer</b> del sito (Windows, Ubuntu, Raspberry, Mac).</p>
 <h3>Passo 8 - Personalizza</h3>
 <p>Dal menu scegli quali <b>sezioni</b> vedere, quali <b>servizi</b> controllare e quali <b>allarmi</b> ricevere (con le soglie). Facoltativo: attiva il <b>riavvio da remoto</b> con un PIN.</p>
@@ -119,6 +120,13 @@ Ottieni un indirizzo stabile del tipo <code>https://nome-pc.tuarete.ts.net</code
 <p>Al primo avvio l'app chiede se vuoi poter riavviare i computer dall'app. Se accetti scegli un PIN di 4-8 cifre; dal menu puoi modificarlo, ripristinarlo o disattivarlo (<b>a tuo rischio e pericolo</b>: senza PIN nessuno può riavviare i computer da remoto). Dopo 5 PIN sbagliati c'è un blocco di 5 minuti. Il PIN lo controlla il tuo server: non è nell'app.</p>
 <h3>Manutenzione dichiarata</h3>
 <p>Per avvisare l'app che stai facendo dei lavori su un computer Linux o Mac, scrivi una frase nel file <code>~/.config/idq-monitor-manutenzione</code>: comparirà nella scheda <i>Attività</i>. Cancella il file a fine lavori.</p>
+<h3>GPU e consumi in watt</h3>
+<p>La scheda <b>GPU</b> compare solo se il computer ha una scheda video <b>dedicata</b> (non quella integrata nel processore): mostra utilizzo, memoria video, temperatura e watt (NVIDIA con <code>nvidia-smi</code>; AMD su Linux).</p>
+<p>La sezione <b>Consumo (watt)</b> mostra i <b>watt totali</b> e, separati, quelli di <b>processore</b> e <b>GPU</b>. Senza altro, il totale è una stima (processore + GPU). Il processore si legge dal contatore di energia del sistema (su Linux serve il permesso di amministratore dato in installazione).</p>
+<p>Per il consumo <b>reale dell'intero PC</b> collega il computer a una presa intelligente <b>Shelly</b> (Gen1 o Gen2) e aggiungi nel file <code>~/.config/idq-monitor-agente.json</code> (su Windows: <code>%APPDATA%\idq-monitor-agente.json</code>):</p>
+<pre><code>"presa": { "tipo": "shelly", "ip": "192.168.1.50", "canale": 0 }</code></pre>
+<p>Poi riavvia l'agente. Da quel momento il totale è quello misurato dalla presa.</p>
+<p>Se il computer è un <b>server professionale</b> (con controller IPMI/BMC e <code>ipmitool</code>), un portatile o ha sensori di potenza nella scheda madre, l'agente li usa in automatico per il totale reale, senza presa. Altrimenti mostra solo ciò che il computer sa misurare.</p>
 <h2 id="it-agente">5. Gli agenti nel dettaglio</h2>
 <p>Il file di configurazione dell'agente è <code>~/.config/idq-monitor-agente.json</code> (Windows: <code>%APPDATA%\idq-monitor-agente.json</code>). Puoi indicare i servizi da mostrare per impostazione predefinita:</p>
 <pre><code>{
@@ -226,6 +234,7 @@ You get a stable address like <code>https://pc-name.yournet.ts.net</code>.</li>
 <li><b>Linux, Raspberry, Mac</b>: in the Terminal (the <code>curl … | bash</code> command).</li>
 <li><b>Windows</b>: in PowerShell (the <code>irm … | iex</code> command).</li>
 </ul>
+<p><b>Administrator permission:</b> the installation asks for it at that moment (on Windows the confirmation window appears; on Linux and Raspberry the <code>sudo</code> password is requested). It is needed for remote restart and to read power consumption: only a narrow rule is created, and if you refuse the monitor still works.</p>
 <p>After a few seconds the computer appears at the top of the app. The command installs the agent and starts it at every boot. Alternatively use the <b>installers</b> on the website (Windows, Ubuntu, Raspberry, Mac).</p>
 <h3>Step 8 - Customise</h3>
 <p>From the menu choose which <b>sections</b> to see, which <b>services</b> to monitor and which <b>alarms</b> to receive (with thresholds). Optional: turn on <b>remote restart</b> with a PIN.</p>
@@ -247,6 +256,13 @@ You get a stable address like <code>https://pc-name.yournet.ts.net</code>.</li>
 <p>On first launch the app asks whether you want to be able to restart your computers from the app. If you accept, choose a PIN of 4-8 digits; from the menu you can change, reset or turn it off (<b>at your own risk</b>: without a PIN nobody can restart computers remotely). After 5 wrong PINs there is a 5-minute lock. The PIN is checked by your server: it is not in the app.</p>
 <h3>Declared maintenance</h3>
 <p>To tell the app you are working on a Linux or Mac computer, write a sentence in the file <code>~/.config/idq-monitor-manutenzione</code>: it will appear in the <i>Activity</i> card. Delete the file when you're done.</p>
+<h3>GPU and power consumption in watts</h3>
+<p>The <b>GPU</b> card appears only if the computer has a <b>dedicated</b> graphics card (not the one built into the processor): it shows usage, video memory, temperature and watts (NVIDIA with <code>nvidia-smi</code>; AMD on Linux).</p>
+<p>The <b>Power (watts)</b> section shows the <b>total watts</b> and, separately, those of the <b>processor</b> and the <b>GPU</b>. By default the total is an estimate (processor + GPU). The processor is read from the system energy counter (on Linux this needs the administrator permission given at installation).</p>
+<p>For the <b>real consumption of the whole PC</b>, plug the computer into a <b>Shelly</b> smart plug (Gen1 or Gen2) and add to the file <code>~/.config/idq-monitor-agente.json</code> (on Windows: <code>%APPDATA%\idq-monitor-agente.json</code>):</p>
+<pre><code>"presa": { "tipo": "shelly", "ip": "192.168.1.50", "canale": 0 }</code></pre>
+<p>Then restart the agent. From then on the total is the one measured by the plug.</p>
+<p>If the computer is a <b>professional server</b> (with an IPMI/BMC controller and <code>ipmitool</code>), a laptop, or has power sensors on the motherboard, the agent uses them automatically for the real total, no plug needed. Otherwise it shows only what the computer can measure.</p>
 <h2 id="en-agente">5. The agents in detail</h2>
 <p>The agent's configuration file is <code>~/.config/idq-monitor-agente.json</code> (Windows: <code>%APPDATA%\idq-monitor-agente.json</code>). You can list the services to show by default:</p>
 <pre><code>{
@@ -354,6 +370,7 @@ Vous obtenez une adresse stable du type <code>https://nom-pc.votrereseau.ts.net<
 <li><b>Linux, Raspberry, Mac</b> : dans le Terminal (commande <code>curl … | bash</code>).</li>
 <li><b>Windows</b> : dans PowerShell (commande <code>irm … | iex</code>).</li>
 </ul>
+<p><b>Droits d'administrateur :</b> l'installation les demande à ce moment-là (sous Windows, la fenêtre de confirmation s'affiche ; sous Linux et Raspberry, le mot de passe <code>sudo</code> est demandé). Ils servent au redémarrage à distance et à la lecture de la consommation : seule une règle limitée est créée, et si vous refusez, le moniteur fonctionne quand même.</p>
 <p>Après quelques secondes, l'ordinateur apparaît en haut de l'application. La commande installe l'agent et le lance à chaque démarrage. Vous pouvez aussi utiliser les <b>installateurs</b> du site (Windows, Ubuntu, Raspberry, Mac).</p>
 <h3>Étape 8 - Personnaliser</h3>
 <p>Dans le menu, choisissez les <b>sections</b> à voir, les <b>services</b> à surveiller et les <b>alarmes</b> à recevoir (avec les seuils). Facultatif : activez le <b>redémarrage à distance</b> avec un code PIN.</p>
@@ -375,6 +392,13 @@ Vous obtenez une adresse stable du type <code>https://nom-pc.votrereseau.ts.net<
 <p>Au premier lancement, l'application demande si vous voulez pouvoir redémarrer vos ordinateurs depuis l'application. Si vous acceptez, choisissez un code PIN de 4 à 8 chiffres ; depuis le menu, vous pouvez le modifier, le réinitialiser ou le désactiver (<b>à vos risques et périls</b> : sans PIN, personne ne peut redémarrer les ordinateurs à distance). Après 5 codes PIN erronés, un blocage de 5 minutes s'applique. Le code PIN est vérifié par votre serveur : il n'est pas dans l'application.</p>
 <h3>Maintenance déclarée</h3>
 <p>Pour signaler à l'application que vous travaillez sur un ordinateur Linux ou Mac, écrivez une phrase dans le fichier <code>~/.config/idq-monitor-manutenzione</code> : elle apparaîtra dans la fiche <i>Activité</i>. Supprimez le fichier à la fin des travaux.</p>
+<h3>GPU et consommation en watts</h3>
+<p>La carte <b>GPU</b> n'apparaît que si l'ordinateur possède une carte graphique <b>dédiée</b> (pas celle intégrée au processeur) : elle affiche l'utilisation, la mémoire vidéo, la température et les watts (NVIDIA avec <code>nvidia-smi</code> ; AMD sous Linux).</p>
+<p>La section <b>Consommation (watts)</b> affiche les <b>watts totaux</b> et, séparément, ceux du <b>processeur</b> et du <b>GPU</b>. Par défaut, le total est une estimation (processeur + GPU). Le processeur est lu depuis le compteur d'énergie du système (sous Linux, cela demande le droit d'administrateur accordé à l'installation).</p>
+<p>Pour la <b>consommation réelle du PC entier</b>, branchez l'ordinateur sur une prise connectée <b>Shelly</b> (Gen1 ou Gen2) et ajoutez dans le fichier <code>~/.config/idq-monitor-agente.json</code> (sous Windows : <code>%APPDATA%\idq-monitor-agente.json</code>) :</p>
+<pre><code>"presa": { "tipo": "shelly", "ip": "192.168.1.50", "canale": 0 }</code></pre>
+<p>Puis redémarrez l'agent. Dès lors, le total est celui mesuré par la prise.</p>
+<p>Si l'ordinateur est un <b>serveur professionnel</b> (avec contrôleur IPMI/BMC et <code>ipmitool</code>), un portable, ou possède des capteurs de puissance sur la carte mère, l'agent les utilise automatiquement pour le total réel, sans prise. Sinon il n'affiche que ce que l'ordinateur sait mesurer.</p>
 <h2 id="fr-agente">5. Les agents en détail</h2>
 <p>Le fichier de configuration de l'agent est <code>~/.config/idq-monitor-agente.json</code> (Windows : <code>%APPDATA%\idq-monitor-agente.json</code>). Vous pouvez indiquer les services à afficher par défaut :</p>
 <pre><code>{
@@ -482,6 +506,7 @@ Du erhältst eine stabile Adresse wie <code>https://pc-name.deinnetz.ts.net</cod
 <li><b>Linux, Raspberry, Mac</b>: im Terminal (der Befehl <code>curl … | bash</code>).</li>
 <li><b>Windows</b>: in PowerShell (der Befehl <code>irm … | iex</code>).</li>
 </ul>
+<p><b>Administratorrechte:</b> Die Installation fragt sie in diesem Moment ab (unter Windows erscheint das Bestätigungsfenster; unter Linux und Raspberry wird das <code>sudo</code>-Passwort verlangt). Sie werden für den Neustart aus der Ferne und zum Auslesen des Stromverbrauchs gebraucht: Es wird nur eine eng begrenzte Regel angelegt, und bei Ablehnung funktioniert der Monitor trotzdem.</p>
 <p>Nach wenigen Sekunden erscheint der Computer oben in der App. Der Befehl installiert den Agenten und startet ihn bei jedem Einschalten. Alternativ nutze die <b>Installer</b> auf der Website (Windows, Ubuntu, Raspberry, Mac).</p>
 <h3>Schritt 8 - Anpassen</h3>
 <p>Wähle im Menü, welche <b>Bereiche</b> du sehen möchtest, welche <b>Dienste</b> überwacht werden und welche <b>Alarme</b> du erhältst (mit Schwellenwerten). Optional: Aktiviere den <b>Fernneustart</b> mit einer PIN.</p>
@@ -503,6 +528,13 @@ Du erhältst eine stabile Adresse wie <code>https://pc-name.deinnetz.ts.net</cod
 <p>Beim ersten Start fragt die App, ob du deine Computer über die App neu starten können möchtest. Wenn du zustimmst, wähle eine PIN mit 4–8 Ziffern; im Menü kannst du sie ändern, zurücksetzen oder deaktivieren (<b>auf eigenes Risiko</b>: ohne PIN kann niemand Computer aus der Ferne neu starten). Nach 5 falschen PINs gilt eine Sperre von 5 Minuten. Die PIN prüft dein Server: Sie steckt nicht in der App.</p>
 <h3>Angekündigte Wartung</h3>
 <p>Um der App mitzuteilen, dass du an einem Linux- oder Mac-Computer arbeitest, schreibe einen Satz in die Datei <code>~/.config/idq-monitor-manutenzione</code>: Er erscheint in der Karte <i>Aktivität</i>. Lösche die Datei nach den Arbeiten.</p>
+<h3>GPU und Stromverbrauch in Watt</h3>
+<p>Die <b>GPU</b>-Karte erscheint nur, wenn der Computer eine <b>dedizierte</b> Grafikkarte hat (nicht die im Prozessor integrierte): Sie zeigt Auslastung, Grafikspeicher, Temperatur und Watt (NVIDIA mit <code>nvidia-smi</code>; AMD unter Linux).</p>
+<p>Der Bereich <b>Verbrauch (Watt)</b> zeigt die <b>Gesamtwatt</b> und getrennt die von <b>Prozessor</b> und <b>GPU</b>. Standardmäßig ist die Gesamtsumme eine Schätzung (Prozessor + GPU). Der Prozessor wird vom Energiezähler des Systems gelesen (unter Linux braucht das die bei der Installation erteilte Administratorerlaubnis).</p>
+<p>Für den <b>echten Verbrauch des gesamten PCs</b> steck den Computer an eine smarte <b>Shelly</b>-Steckdose (Gen1 oder Gen2) und füge in die Datei <code>~/.config/idq-monitor-agente.json</code> (unter Windows: <code>%APPDATA%\idq-monitor-agente.json</code>) ein:</p>
+<pre><code>"presa": { "tipo": "shelly", "ip": "192.168.1.50", "canale": 0 }</code></pre>
+<p>Starte dann den Agenten neu. Ab dann ist die Gesamtsumme der von der Steckdose gemessene Wert.</p>
+<p>Ist der Computer ein <b>professioneller Server</b> (mit IPMI/BMC-Controller und <code>ipmitool</code>), ein Laptop oder hat Leistungssensoren auf dem Mainboard, nutzt der Agent sie automatisch für die echte Gesamtsumme, ohne Steckdose. Sonst zeigt er nur, was der Computer messen kann.</p>
 <h2 id="de-agente">5. Die Agenten im Detail</h2>
 <p>Die Konfigurationsdatei des Agenten ist <code>~/.config/idq-monitor-agente.json</code> (Windows: <code>%APPDATA%\idq-monitor-agente.json</code>). Du kannst die standardmäßig angezeigten Dienste angeben:</p>
 <pre><code>{
@@ -610,6 +642,7 @@ Obtienes una dirección estable del tipo <code>https://nombre-pc.turred.ts.net</
 <li><b>Linux, Raspberry, Mac</b>: en el Terminal (el comando <code>curl … | bash</code>).</li>
 <li><b>Windows</b>: en PowerShell (el comando <code>irm … | iex</code>).</li>
 </ul>
+<p><b>Permisos de administrador:</b> la instalación los pide en ese momento (en Windows aparece la ventana de confirmación; en Linux y Raspberry se pide la contraseña de <code>sudo</code>). Hacen falta para el reinicio remoto y para leer el consumo: solo se crea una regla limitada, y si lo rechazas el monitor funciona igualmente.</p>
 <p>En pocos segundos el ordenador aparece arriba en la app. El comando instala el agente y lo inicia en cada encendido. También puedes usar los <b>instaladores</b> del sitio web (Windows, Ubuntu, Raspberry, Mac).</p>
 <h3>Paso 8 - Personaliza</h3>
 <p>Desde el menú elige qué <b>secciones</b> ver, qué <b>servicios</b> controlar y qué <b>alarmas</b> recibir (con sus umbrales). Opcional: activa el <b>reinicio remoto</b> con un PIN.</p>
@@ -631,6 +664,13 @@ Obtienes una dirección estable del tipo <code>https://nombre-pc.turred.ts.net</
 <p>En el primer inicio la app pregunta si quieres poder reiniciar tus ordenadores desde la app. Si aceptas, elige un PIN de 4 a 8 cifras; desde el menú puedes cambiarlo, restablecerlo o desactivarlo (<b>bajo tu propio riesgo</b>: sin PIN nadie puede reiniciar ordenadores a distancia). Tras 5 PIN erróneos hay un bloqueo de 5 minutos. El PIN lo comprueba tu servidor: no está en la app.</p>
 <h3>Mantenimiento declarado</h3>
 <p>Para avisar a la app de que estás trabajando en un ordenador Linux o Mac, escribe una frase en el archivo <code>~/.config/idq-monitor-manutenzione</code>: aparecerá en la tarjeta <i>Actividad</i>. Borra el archivo al terminar.</p>
+<h3>GPU y consumo en vatios</h3>
+<p>La tarjeta <b>GPU</b> solo aparece si el ordenador tiene una tarjeta gráfica <b>dedicada</b> (no la integrada en el procesador): muestra uso, memoria de vídeo, temperatura y vatios (NVIDIA con <code>nvidia-smi</code>; AMD en Linux).</p>
+<p>La sección <b>Consumo (vatios)</b> muestra los <b>vatios totales</b> y, por separado, los del <b>procesador</b> y de la <b>GPU</b>. Por defecto el total es una estimación (procesador + GPU). El procesador se lee del contador de energía del sistema (en Linux hace falta el permiso de administrador dado en la instalación).</p>
+<p>Para el <b>consumo real de todo el PC</b>, conecta el ordenador a un enchufe inteligente <b>Shelly</b> (Gen1 o Gen2) y añade en el archivo <code>~/.config/idq-monitor-agente.json</code> (en Windows: <code>%APPDATA%\idq-monitor-agente.json</code>):</p>
+<pre><code>"presa": { "tipo": "shelly", "ip": "192.168.1.50", "canale": 0 }</code></pre>
+<p>Después reinicia el agente. Desde entonces el total es el medido por el enchufe.</p>
+<p>Si el ordenador es un <b>servidor profesional</b> (con controlador IPMI/BMC e <code>ipmitool</code>), un portátil o tiene sensores de potencia en la placa base, el agente los usa automáticamente para el total real, sin enchufe. Si no, solo muestra lo que el ordenador sabe medir.</p>
 <h2 id="es-agente">5. Los agentes en detalle</h2>
 <p>El archivo de configuración del agente es <code>~/.config/idq-monitor-agente.json</code> (Windows: <code>%APPDATA%\idq-monitor-agente.json</code>). Puedes indicar los servicios que se muestran por defecto:</p>
 <pre><code>{
