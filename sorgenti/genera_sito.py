@@ -11,16 +11,25 @@ VERSIONE = "1.1"
 # Link di donazione (lasciare vuoto finche' non sono pronti: il pulsante mostra "a breve"). Esempi: "https://paypal.me/NOME", "https://revolut.me/NOME"
 DONA = {"PayPal": "https://paypal.me/IDQdeveloper", "Revolut": "https://revolut.me/paolox0hv"}
 # (chiave testo sistema, chiave nota, file, icona)
-FILE = [
- ("os_android", "n_android", f"downloads/{VERSIONE}/IDQ-Monitor-User-{VERSIONE}.apk", "🤖"),
- ("os_ios", "n_ios", f"downloads/{VERSIONE}/IDQ-Monitor-User-iOS-non-firmato.ipa", "📱"),
- ("os_win", "n_win", f"downloads/{VERSIONE}/IDQ-Monitor-User-Setup-Windows.exe", "🪟"),
- ("os_deb", "n_deb", f"downloads/{VERSIONE}/idq-monitor-user_{VERSIONE}_amd64.deb", "🐧"),
- ("os_rpi", "n_rpi", f"downloads/{VERSIONE}/idq-monitor-user_{VERSIONE}_arm64.deb", "🍓"),
- ("os_mac1", "n_mac", f"downloads/{VERSIONE}/IDQ-Monitor-User-macOS-arm64.zip", "🍎"),
- ("os_mac2", "n_mac", f"downloads/{VERSIONE}/IDQ-Monitor-User-macOS-x64.zip", "🍎"),
- ("os_srv", "n_srv", "downloads/idq-monitor-server.zip", "🖥"),
+FILE = [   # (chiave etichetta, icona, file; None = popup "presto su Google Play")
+ ("per_win", "win", f"downloads/{VERSIONE}/IDQ-Monitor-User-Setup-Windows.exe"),
+ ("per_linux", "linux", f"downloads/{VERSIONE}/idq-monitor-user_{VERSIONE}_amd64.deb"),
+ ("per_rpi", "rpi", f"downloads/{VERSIONE}/idq-monitor-user_{VERSIONE}_arm64.deb"),
+ ("per_mac1", "mac", f"downloads/{VERSIONE}/IDQ-Monitor-User-macOS-arm64.zip"),
+ ("per_mac2", "mac", f"downloads/{VERSIONE}/IDQ-Monitor-User-macOS-x64.zip"),
+ ("per_android", "android", None),
+ ("per_ios", "ios", f"downloads/{VERSIONE}/IDQ-Monitor-User-iOS-non-firmato.ipa"),
+ ("per_srv", "srv", "downloads/idq-monitor-server.zip"),
 ]
+ICONE = {   # icone semplici disegnate a mano (nessuna risorsa esterna)
+ "win": '<svg viewBox="0 0 48 48"><path d="M5 9l17-2.4V23H5zM25 6.2L43 3.5V23H25zM5 25h17v16.4L5 39zM25 25h18v19.6L25 42z"/></svg>',
+ "linux": '<svg viewBox="0 0 48 48"><rect x="4" y="8" width="40" height="32" rx="5" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M12 19l8 5-8 5M24 31h12" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ "rpi": '<svg viewBox="0 0 48 48"><circle cx="17" cy="27" r="7"/><circle cx="31" cy="27" r="7"/><circle cx="24" cy="35" r="7"/><circle cx="24" cy="21" r="7"/><path d="M24 14c-1-5-5-8-9-8 1 5 4 8 9 8zM24 14c1-5 5-8 9-8-1 5-4 8-9 8z"/></svg>',
+ "mac": '<svg viewBox="0 0 48 48"><path d="M33 25c0-4 3-6 3-6-2-3-5-3-6-3-2 0-4 1-5 1s-3-1-5-1c-4 0-8 3-8 9 0 7 5 14 8 14 2 0 3-1 5-1s3 1 5 1c3 0 7-6 7-9 0 0-4-2-4-5zM29 12c1-1 2-3 2-5-2 0-4 1-5 3-1 1-2 3-2 5 2 0 4-1 5-3z"/></svg>',
+ "android": '<svg viewBox="0 0 48 48"><path d="M9 32a15 15 0 0130 0zM15 10l3 5M33 10l-3 5" fill="currentColor" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="19" cy="25" r="1.8" fill="#fff"/><circle cx="29" cy="25" r="1.8" fill="#fff"/></svg>',
+ "ios": '<svg viewBox="0 0 48 48"><rect x="13" y="3" width="22" height="42" rx="5" fill="none" stroke="currentColor" stroke-width="3.5"/><rect x="20" y="7" width="8" height="2.5" rx="1.2"/><circle cx="24" cy="39.5" r="2"/></svg>',
+ "srv": '<svg viewBox="0 0 48 48"><rect x="6" y="6" width="36" height="13" rx="3"/><rect x="6" y="24" width="36" height="13" rx="3"/><circle cx="13" cy="12.5" r="2" fill="#fff"/><circle cx="13" cy="30.5" r="2" fill="#fff"/><path d="M24 37v6M16 43h16" stroke="currentColor" stroke-width="3" fill="none"/></svg>',
+}
 def L(chiave, tag="span"):
     return "".join('<%s class="l" data-l="%s">%s</%s>' % (tag, l, T[chiave][i], tag) for i, (l, _) in enumerate(LING))
 def mb(percorso):
@@ -45,6 +54,8 @@ h2{margin:46px 0 14px;font-size:26px}h3{margin:18px 0 6px;font-size:18px}
 .shot{text-align:center}.shot img{max-width:100%;width:380px;border-radius:14px;border:1px solid var(--bd)}.shot small,.mu{color:var(--mu)}
 table.dl{width:100%;border-collapse:separate;border-spacing:0 10px}table.dl td{background:var(--card);padding:12px 14px;vertical-align:middle}table.dl td:first-child{border-radius:14px 0 0 14px;width:56px;font-size:26px;text-align:center}table.dl td:last-child{border-radius:0 14px 14px 0;text-align:right;white-space:nowrap}
 table.dl .nome{font-weight:700}table.dl .nota{color:var(--mu);font-size:14px;line-height:1.4}
+.os-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:14px 0}.os{display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px 10px;text-decoration:none;color:var(--tx);text-align:center}.os:hover{border-color:var(--ac)}.os svg{width:56px;height:56px;fill:currentColor;color:var(--ac)}.os .et{font-weight:700;font-size:15px}.os small{color:var(--mu)}
+.pop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);align-items:center;justify-content:center;z-index:9;padding:16px}.pop.on{display:flex}.pop .box{background:var(--bg);border-radius:16px;padding:22px;max-width:360px;text-align:center}.pop button{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:9px 22px;font-size:16px;cursor:pointer}
 .btn{display:inline-block;background:var(--ac);color:#fff;border-radius:10px;padding:9px 16px;text-decoration:none;font-weight:600}.btn small{opacity:.85;font-weight:400}
 @media(max-width:640px){table.dl td:last-child{display:block;text-align:left;border-radius:0 0 14px 14px}table.dl td:nth-child(2){border-radius:0 14px 0 0}table.dl td:first-child{border-radius:14px 0 0 0;display:inline-block}table.dl tr{display:block}}
 .dona{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px;text-align:center}.dona a{display:inline-block;margin:4px 6px;background:#e8465a;color:#fff;border-radius:999px;padding:11px 26px;font-weight:700;text-decoration:none}#dmsg{margin-top:10px;color:var(--ok);min-height:1.4em}
@@ -58,6 +69,7 @@ var l=q||s||(navigator.language||"it").slice(0,2).toLowerCase();if(ok.indexOf(l)
 function imposta(x){document.documentElement.setAttribute("data-l",x);document.documentElement.lang=x;document.querySelectorAll(".lingue button").forEach(function(b){b.classList.toggle("on",b.dataset.l==x)});try{localStorage.setItem("l",x)}catch(e){}
 var t=document.querySelector("title");var k=t&&t.dataset["t"+x];if(k)document.title=k;document.querySelectorAll("a[data-g]").forEach(function(a){a.href=a.dataset.g+"?l="+x})}
 document.querySelectorAll(".lingue button").forEach(function(b){b.onclick=function(){imposta(b.dataset.l)}});imposta(l);
+var pa=document.getElementById("os-android"),pp=document.getElementById("pop");if(pa){pa.onclick=function(e){e.preventDefault();pp.classList.add("on")};document.getElementById("pop-ok").onclick=function(){pp.classList.remove("on")};pp.onclick=function(e){if(e.target===pp)pp.classList.remove("on")}}
 document.querySelectorAll(".dona a").forEach(function(d){if(d.getAttribute("href")!=="#")return;d.onclick=function(e){e.preventDefault();var m={it:%s,en:%s,fr:%s,de:%s,es:%s};document.getElementById("dmsg").textContent=m[document.documentElement.lang]||m.en}})})();"""
 def testa(titolo_chiave, extra=""):
     titoli = " ".join('data-t%s="%s"' % (l, html.escape(T[titolo_chiave][i])) for i, (l, _) in enumerate(LING))
@@ -78,11 +90,13 @@ def indice():
     for n in range(1, 7): h += '<div class="card"><b>%s</b>%s</div>' % (L("f%dt" % n), L("f%d" % n))
     h += "</div>"
     h += '<h2>%s</h2><div class="shot">%s<br><small>%s</small></div>' % (L("h_screen"), "".join('<img class="l" data-l="%s" src="img/app-%s.jpg" alt="IDQ Monitor User">' % (l, l) for l, _ in LING), L("screen_n"))
-    h += '<h2 id="download">%s</h2><p class="mu">%s · %s %s</p><table class="dl">' % (L("h_download"), L("d_intro"), L("d_versione"), VERSIONE)
-    for chiave, nota, percorso, icona in FILE:
-        nome = os.path.basename(percorso)
-        h += '<tr><td>%s</td><td><div class="nome">%s</div><div class="nota">%s</div></td><td><a class="btn" href="%s" download="%s">%s <small>%s</small></a></td></tr>' % (icona, L(chiave), L(nota), percorso, nome, L("cta_scarica"), mb(percorso))
-    h += "</table>"
+    h += '<h2 id="download">%s</h2><p class="mu">%s · %s %s</p>' % (L("h_download"), L("d_intro"), L("d_versione"), VERSIONE)
+    h += '<div class="os-grid">'
+    for chiave, icona, percorso in FILE:
+        if percorso is None: h += '<a class="os" href="#" id="os-android">%s<span class="et">%s</span><small>Google Play</small></a>' % (ICONE[icona], L(chiave))
+        else: h += '<a class="os" href="%s" download="%s">%s<span class="et">%s</span><small>%s</small></a>' % (percorso, os.path.basename(percorso), ICONE[icona], L(chiave), mb(percorso))
+    h += '</div><details class="note"><summary>%s</summary>%s</details>' % (L("note_inst"), "".join('<p><b>%s</b>: %s</p>' % (L(c), L(n)) for c, n in (("per_win", "n_win"), ("per_linux", "n_deb"), ("per_rpi", "n_rpi"), ("per_mac1", "n_mac"), ("per_ios", "n_ios"), ("per_srv", "n_srv"))))
+    h += '<div class="pop" id="pop"><div class="box"><b>%s</b><p>%s</p><button id="pop-ok" type="button">%s</button></div></div>' % (L("pop_t"), L("pop_m"), L("pop_ok"))
     h += '<h2 id="prova">%s</h2><p>%s</p><h2>%s</h2><p>%s</p><p><a class="btn" data-g="guida.html" href="guida.html">%s</a></p>' % (L("h_prova"), L("p_prova"), L("h_server"), L("p_server"), L("cta_guida"))
     bt = "".join('<a id="dona-%s" href="%s"%s>%s</a> ' % (n.lower(), html.escape(u) if u else "#", ' target="_blank" rel="noopener"' if u else "", n) for n, u in DONA.items())
     h += '<h2 id="dona">%s</h2><div class="dona"><p>%s</p><p><b>%s</b></p>%s<div id="dmsg"></div></div>' % (L("h_dona"), L("p_dona"), L("b_dona"), bt)

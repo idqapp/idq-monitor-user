@@ -53,3 +53,19 @@ T = {
 "guida": ("Guida", "Guide", "Guide", "Anleitung", "Guía"),
 "home": ("Home", "Home", "Accueil", "Startseite", "Inicio"),
 }
+
+T.update({
+"per_win": ("per Windows", "for Windows", "pour Windows", "für Windows", "para Windows"),
+"per_linux": ("per Linux (Ubuntu, Debian)", "for Linux (Ubuntu, Debian)", "pour Linux (Ubuntu, Debian)", "für Linux (Ubuntu, Debian)", "para Linux (Ubuntu, Debian)"),
+"per_rpi": ("per Raspberry Pi", "for Raspberry Pi", "pour Raspberry Pi", "für Raspberry Pi", "para Raspberry Pi"),
+"per_mac1": ("per Mac (Apple Silicon)", "for Mac (Apple Silicon)", "pour Mac (Apple Silicon)", "für Mac (Apple Silicon)", "para Mac (Apple Silicon)"),
+"per_mac2": ("per Mac (Intel)", "for Mac (Intel)", "pour Mac (Intel)", "für Mac (Intel)", "para Mac (Intel)"),
+"per_android": ("per Android", "for Android", "pour Android", "für Android", "para Android"),
+"per_ios": ("per iPhone e iPad", "for iPhone and iPad", "pour iPhone et iPad", "für iPhone und iPad", "para iPhone y iPad"),
+"per_srv": ("Server (il tuo server)", "Server (your own server)", "Serveur (votre serveur)", "Server (dein eigener Server)", "Servidor (tu propio servidor)"),
+"pop_t": ("Presto su Google Play", "Coming soon to Google Play", "Bientôt sur Google Play", "Bald bei Google Play", "Próximamente en Google Play"),
+"pop_m": ("L'app per Android sarà disponibile a breve su Google Play. Grazie per la pazienza!", "The Android app will be available on Google Play soon. Thanks for your patience!", "L'application Android sera bientôt disponible sur Google Play. Merci de votre patience !", "Die Android-App ist bald bei Google Play erhältlich. Danke für deine Geduld!", "La app para Android estará disponible pronto en Google Play. ¡Gracias por tu paciencia!"),
+"pop_ok": ("Ho capito", "Got it", "Compris", "Verstanden", "Entendido"),
+})
+
+T["note_inst"] = ("Note sull'installazione", "Installation notes", "Notes d'installation", "Hinweise zur Installation", "Notas de instalación")
