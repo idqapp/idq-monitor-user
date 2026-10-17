@@ -47,7 +47,7 @@ header.top .brand{display:flex;align-items:center;gap:10px;font-weight:700;text-
 .lingue button{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:999px;padding:6px 12px;margin:2px;cursor:pointer;font:inherit;font-size:14px}.lingue button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
 main{max-width:980px;margin:0 auto;padding:0 20px 60px}
 .hero{background:var(--hero);color:#fff;padding:56px 20px 48px;text-align:center}.hero img{width:120px;height:120px;border-radius:28px;box-shadow:0 8px 30px rgba(0,0,0,.4)}
-.provabox{max-width:560px;margin:22px auto 6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:12px 16px;color:#e6edf8;line-height:1.4}.provabox b{display:block;font-size:18px;margin-bottom:4px;color:#fff}.provabox span{font-size:15px}.cta.big{display:inline-flex;flex-direction:column;align-items:center;gap:2px;padding:16px 44px;margin-top:18px}.cta.big .g{font-size:24px;font-weight:800;letter-spacing:.5px}.cta.big small{font-size:15px;opacity:.95}
+.provabox{max-width:560px;margin:22px auto 6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:12px 16px;color:#e6edf8;line-height:1.4}.provabox b{display:block;font-size:18px;margin-bottom:4px;color:#fff}.provabox span{font-size:15px}.cta.big{display:inline-flex;flex-direction:column;align-items:center;gap:2px;padding:16px 22px;margin-top:18px;max-width:94%}.cta.big .g{text-transform:uppercase;font-size:clamp(15px,4.6vw,22px);font-weight:800;letter-spacing:.5px}.cta.big small{font-size:15px;opacity:.95}
 .hero h1{font-size:clamp(30px,6vw,46px);margin:18px 0 8px}.hero p{max-width:660px;margin:0 auto;color:#cfd8ee;font-size:19px}
 .cta{display:inline-block;margin:22px 8px 0;background:#1d5fa8;color:#fff;border-radius:999px;padding:12px 26px;font-weight:600;text-decoration:none}.cta.alt{background:transparent;border:2px solid #6fa8dc;color:#cfe3ff}
 h2{margin:46px 0 14px;font-size:26px}h3{margin:18px 0 6px;font-size:18px}
@@ -88,7 +88,7 @@ def fine():
 
 def indice():
     h = testa("titolo")
-    h += '<section class="hero"><img src="icona.png" alt=""><h1>IDQ Monitor User</h1><p>%s</p><div class="provabox"><b>%s</b><span>%s</span></div><a class="cta big" href="#download"><span class="g">%s</span><small>%s</small></a></section><main>' % (L("hero_p"), L("h_prova"), L("p_prova"), L("cta_ora"), L("cta_sub"))
+    h += '<section class="hero"><img src="icona.png" alt=""><h1>IDQ Monitor User</h1><p>%s</p><div class="provabox"><b>%s</b><span>%s</span></div><a class="cta big" href="#download"><span class="g">%s</span><small>%s</small></a></section><main>' % (L("hero_p"), L("h_prova"), L("p_prova"), L("cta_sub"), L("cta_ora"))
     h += "<h2>%s</h2><div class=\"grid\">" % L("h_funzioni")
     for n in range(1, 7): h += '<div class="card"><b>%s</b>%s</div>' % (L("f%dt" % n), L("f%d" % n))
     h += "</div>"
