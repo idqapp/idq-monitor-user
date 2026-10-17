@@ -19,7 +19,6 @@ FILE = [   # (chiave etichetta, icona, file[, sottotitolo]; l'icona Android apre
  ("per_mac2", "mac", f"downloads/{VERSIONE}/IDQ-Monitor-User-macOS-x64.zip"),
  ("per_android", "android", f"downloads/{VERSIONE}/IDQ-Monitor-User-{VERSIONE}.apk", "android"),
  ("per_ios", "ios", f"downloads/{VERSIONE}/IDQ-Monitor-User-iOS-non-firmato.ipa"),
- ("per_srv", "srv", "downloads/idq-monitor-server.zip", "sub_srv"),
 ]
 ICONE = {   # icone semplici disegnate a mano (nessuna risorsa esterna)
  "win": '<svg viewBox="0 0 48 48"><path d="M5 9l17-2.4V23H5zM25 6.2L43 3.5V23H25zM5 25h17v16.4L5 39zM25 25h18v19.6L25 42z"/></svg>',
@@ -28,6 +27,7 @@ ICONE = {   # icone semplici disegnate a mano (nessuna risorsa esterna)
  "mac": '<svg viewBox="0 0 48 48"><path d="M33 25c0-4 3-6 3-6-2-3-5-3-6-3-2 0-4 1-5 1s-3-1-5-1c-4 0-8 3-8 9 0 7 5 14 8 14 2 0 3-1 5-1s3 1 5 1c3 0 7-6 7-9 0 0-4-2-4-5zM29 12c1-1 2-3 2-5-2 0-4 1-5 3-1 1-2 3-2 5 2 0 4-1 5-3z"/></svg>',
  "android": '<svg viewBox="0 0 48 48"><path d="M9 32a15 15 0 0130 0zM15 10l3 5M33 10l-3 5" fill="currentColor" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="19" cy="25" r="1.8" fill="#fff"/><circle cx="29" cy="25" r="1.8" fill="#fff"/></svg>',
  "ios": '<svg viewBox="0 0 48 48"><rect x="13" y="3" width="22" height="42" rx="5" fill="none" stroke="currentColor" stroke-width="3.5"/><rect x="20" y="7" width="8" height="2.5" rx="1.2"/><circle cx="24" cy="39.5" r="2"/></svg>',
+ "guida": '<svg viewBox="0 0 48 48"><path d="M8 7h15c3 0 5 2 5 5v30c0-2-2-4-5-4H8zM40 7H25c-3 0-5 2-5 5v30c0-2 2-4 5-4h15z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/></svg>',
  "srv": '<svg viewBox="0 0 48 48"><rect x="6" y="6" width="36" height="13" rx="3"/><rect x="6" y="24" width="36" height="13" rx="3"/><circle cx="13" cy="12.5" r="2" fill="#fff"/><circle cx="13" cy="30.5" r="2" fill="#fff"/><path d="M24 37v6M16 43h16" stroke="currentColor" stroke-width="3" fill="none"/></svg>',
 }
 def L(chiave, tag="span"):
@@ -70,7 +70,7 @@ function imposta(x){document.documentElement.setAttribute("data-l",x);document.d
 var t=document.querySelector("title");var k=t&&t.dataset["t"+x];if(k)document.title=k;document.querySelectorAll("a[data-g]").forEach(function(a){a.href=a.dataset.g+"?l="+x})}
 document.querySelectorAll(".lingue button").forEach(function(b){b.onclick=function(){imposta(b.dataset.l)}});imposta(l);
 var pp=document.getElementById("pop"),pend=null;function scarica(){if(!pend)return;var a=document.createElement("a");a.href=pend.href;a.download=pend.download;document.body.appendChild(a);a.click();a.remove();pend=null;pp.classList.remove("on")}
-document.querySelectorAll("a.os").forEach(function(o){o.onclick=function(e){e.preventDefault();pend={href:o.getAttribute("href"),download:o.getAttribute("download")};pp.querySelector(".and").style.display=o.dataset.and?"block":"none";pp.classList.add("on")}});
+document.querySelectorAll("a.os:not(.guida)").forEach(function(o){o.onclick=function(e){e.preventDefault();pend={href:o.getAttribute("href"),download:o.getAttribute("download")};pp.querySelector(".and").style.display=o.dataset.and?"block":"none";pp.classList.add("on")}});
 document.getElementById("pop-ok").onclick=scarica;pp.querySelectorAll(".dn").forEach(function(d){d.addEventListener("click",function(){setTimeout(scarica,200)})});pp.onclick=function(e){if(e.target===pp){pend=null;pp.classList.remove("on")}}
 document.querySelectorAll(".dona a").forEach(function(d){if(d.getAttribute("href")!=="#")return;d.onclick=function(e){e.preventDefault();var m={it:%s,en:%s,fr:%s,de:%s,es:%s};document.getElementById("dmsg").textContent=m[document.documentElement.lang]||m.en}})})();"""
 def testa(titolo_chiave, extra=""):
@@ -99,9 +99,12 @@ def indice():
         if False: pass
         else: h += '<a class="os" href="%s" download="%s"%s>%s<span class="et">%s</span>%s<small>%s</small></a>' % (percorso, os.path.basename(percorso), ' data-and="1"' if icona == "android" else "", ICONE[icona], L(chiave), sub, mb(percorso))
     h += '</div><details class="note"><summary>%s</summary>%s</details>' % (L("note_inst"), "".join('<p><b>%s</b>: %s</p>' % (L(c), L(n)) for c, n in (("per_win", "n_win"), ("per_linux", "n_deb"), ("per_rpi", "n_rpi"), ("per_mac1", "n_mac"), ("per_ios", "n_ios"), ("per_srv", "n_srv"))))
+    srv_tile = '<a class="os" href="downloads/idq-monitor-server.zip" download="idq-monitor-server.zip">%s<span class="et">%s</span><small class="sub">%s</small><small>%s</small></a>' % (ICONE["srv"], L("per_srv"), L("sub_srv"), mb("downloads/idq-monitor-server.zip"))
+    guida_tile = '<a class="os guida" data-g="guida.html" href="guida.html">%s<span class="et">%s</span><small class="sub">%s</small></a>' % (ICONE["guida"], L("per_guida"), L("sub_guida"))
+    h += '<h2 id="server">%s</h2><p>%s</p><div class="os-grid">%s%s</div>' % (L("h_server"), L("p_server"), srv_tile, guida_tile)
     bd = "".join('<a class="btn dn" href="%s" target="_blank" rel="noopener">%s</a> ' % (html.escape(u), n) for n, u in DONA.items() if u)
     h += '<div class="pop" id="pop"><div class="box"><b>%s</b><p>%s</p><p class="and" style="display:none">%s</p><p><span class="mu">%s</span> %s</p><p><button id="pop-ok" type="button">%s</button></p></div></div>' % (L("don_t"), L("don_m"), L("pop_m"), L("don_con"), bd, L("don_skip"))
-    h += '<h2 id="prova">%s</h2><p>%s</p><h2>%s</h2><p>%s</p><p><a class="btn" data-g="guida.html" href="guida.html">%s</a></p>' % (L("h_prova"), L("p_prova"), L("h_server"), L("p_server"), L("cta_guida"))
+    h += '<h2 id="prova">%s</h2><p>%s</p>' % (L("h_prova"), L("p_prova"))
     bt = "".join('<a id="dona-%s" href="%s"%s>%s</a> ' % (n.lower(), html.escape(u) if u else "#", ' target="_blank" rel="noopener"' if u else "", n) for n, u in DONA.items())
     h += '<h2 id="dona">%s</h2><div class="dona"><p>%s</p><p><b>%s</b></p>%s<div id="dmsg"></div></div>' % (L("h_dona"), L("p_dona"), L("b_dona"), bt)
     return h + "</main>" + fine()
