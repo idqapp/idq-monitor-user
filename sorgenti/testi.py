@@ -100,3 +100,8 @@ T.update({
 "per_guida": ("Guida completa al tuo server", "Complete guide to your own server", "Guide complète pour votre serveur", "Komplette Anleitung für deinen Server", "Guía completa para tu servidor"),
 "sub_guida": ("Passo passo, gratis: circa 20 minuti e nessuna porta da aprire sul router", "Step by step, free: about 20 minutes and no router ports to open", "Pas à pas, gratuit : environ 20 minutes et aucun port à ouvrir sur le routeur", "Schritt für Schritt, kostenlos: etwa 20 Minuten und kein Router-Port nötig", "Paso a paso, gratis: unos 20 minutos y sin abrir puertos en el router"),
 })
+
+T.update({
+"cta_ora": ("SCARICA ORA", "DOWNLOAD NOW", "TÉLÉCHARGER MAINTENANT", "JETZT HERUNTERLADEN", "DESCARGAR AHORA"),
+"cta_sub": ("Provalo gratis per 24 ore", "Try it free for 24 hours", "Essayez-le gratuitement pendant 24 h", "Teste es 24 Stunden kostenlos", "Pruébalo gratis durante 24 horas"),
+})
