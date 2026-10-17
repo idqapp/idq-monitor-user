@@ -8,6 +8,8 @@ from privacy_testi import PRIV
 RADICE = os.path.join(os.path.dirname(__file__), "..")
 LING = [("it", "Italiano"), ("en", "English"), ("fr", "Français"), ("de", "Deutsch"), ("es", "Español")]
 VERSIONE = "1.1"
+# Link di donazione (lasciare vuoto finche' non sono pronti: il pulsante mostra "a breve"). Esempi: "https://paypal.me/NOME", "https://revolut.me/NOME"
+DONA = {"PayPal": "", "Revolut": ""}
 # (chiave testo sistema, chiave nota, file, icona)
 FILE = [
  ("os_android", "n_android", f"downloads/{VERSIONE}/IDQ-Monitor-User-{VERSIONE}.apk", "🤖"),
@@ -45,7 +47,7 @@ table.dl{width:100%;border-collapse:separate;border-spacing:0 10px}table.dl td{b
 table.dl .nome{font-weight:700}table.dl .nota{color:var(--mu);font-size:14px;line-height:1.4}
 .btn{display:inline-block;background:var(--ac);color:#fff;border-radius:10px;padding:9px 16px;text-decoration:none;font-weight:600}.btn small{opacity:.85;font-weight:400}
 @media(max-width:640px){table.dl td:last-child{display:block;text-align:left;border-radius:0 0 14px 14px}table.dl td:nth-child(2){border-radius:0 14px 0 0}table.dl td:first-child{border-radius:14px 0 0 0;display:inline-block}table.dl tr{display:block}}
-.dona{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px;text-align:center}.dona a{display:inline-block;background:#e8465a;color:#fff;border-radius:999px;padding:11px 26px;font-weight:700;text-decoration:none}#dmsg{margin-top:10px;color:var(--ok);min-height:1.4em}
+.dona{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px;text-align:center}.dona a{display:inline-block;margin:4px 6px;background:#e8465a;color:#fff;border-radius:999px;padding:11px 26px;font-weight:700;text-decoration:none}#dmsg{margin-top:10px;color:var(--ok);min-height:1.4em}
 footer{border-top:1px solid var(--bd);padding:24px 20px;text-align:center;color:var(--mu);font-size:15px}
 .l{display:none}html[data-l=it] .l[data-l=it],html[data-l=en] .l[data-l=en],html[data-l=fr] .l[data-l=fr],html[data-l=de] .l[data-l=de],html[data-l=es] .l[data-l=es]{display:inline}
 html[data-l=it] div.l[data-l=it],html[data-l=en] div.l[data-l=en],html[data-l=fr] div.l[data-l=fr],html[data-l=de] div.l[data-l=de],html[data-l=es] div.l[data-l=es]{display:block}
@@ -56,7 +58,7 @@ var l=q||s||(navigator.language||"it").slice(0,2).toLowerCase();if(ok.indexOf(l)
 function imposta(x){document.documentElement.setAttribute("data-l",x);document.documentElement.lang=x;document.querySelectorAll(".lingue button").forEach(function(b){b.classList.toggle("on",b.dataset.l==x)});try{localStorage.setItem("l",x)}catch(e){}
 var t=document.querySelector("title");var k=t&&t.dataset["t"+x];if(k)document.title=k;document.querySelectorAll("a[data-g]").forEach(function(a){a.href=a.dataset.g+"?l="+x})}
 document.querySelectorAll(".lingue button").forEach(function(b){b.onclick=function(){imposta(b.dataset.l)}});imposta(l);
-var d=document.getElementById("dona");if(d)d.onclick=function(e){e.preventDefault();var m={it:%s,en:%s,fr:%s,de:%s,es:%s};document.getElementById("dmsg").textContent=m[document.documentElement.lang]||m.en}})();"""
+document.querySelectorAll(".dona a").forEach(function(d){if(d.getAttribute("href")!=="#")return;d.onclick=function(e){e.preventDefault();var m={it:%s,en:%s,fr:%s,de:%s,es:%s};document.getElementById("dmsg").textContent=m[document.documentElement.lang]||m.en}})})();"""
 def testa(titolo_chiave, extra=""):
     titoli = " ".join('data-t%s="%s"' % (l, html.escape(T[titolo_chiave][i])) for i, (l, _) in enumerate(LING))
     return """<!doctype html><html lang="it" data-l="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -82,7 +84,8 @@ def indice():
         h += '<tr><td>%s</td><td><div class="nome">%s</div><div class="nota">%s</div></td><td><a class="btn" href="%s" download="%s">%s <small>%s</small></a></td></tr>' % (icona, L(chiave), L(nota), percorso, nome, L("cta_scarica"), mb(percorso))
     h += "</table>"
     h += '<h2 id="prova">%s</h2><p>%s</p><h2>%s</h2><p>%s</p><p><a class="btn" data-g="guida.html" href="guida.html">%s</a></p>' % (L("h_prova"), L("p_prova"), L("h_server"), L("p_server"), L("cta_guida"))
-    h += '<h2>%s</h2><div class="dona"><p>%s</p><a id="dona" href="#" data-stato="da-configurare">%s</a><div id="dmsg"></div></div>' % (L("h_dona"), L("p_dona"), L("b_dona"))
+    bt = "".join('<a id="dona-%s" href="%s"%s>%s</a> ' % (n.lower(), html.escape(u) if u else "#", ' target="_blank" rel="noopener"' if u else "", n) for n, u in DONA.items())
+    h += '<h2 id="dona">%s</h2><div class="dona"><p>%s</p><p><b>%s</b></p>%s<div id="dmsg"></div></div>' % (L("h_dona"), L("p_dona"), L("b_dona"), bt)
     return h + "</main>" + fine()
 
 def privacy():
