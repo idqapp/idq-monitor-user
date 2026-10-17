@@ -9,7 +9,7 @@ RADICE = os.path.join(os.path.dirname(__file__), "..")
 LING = [("it", "Italiano"), ("en", "English"), ("fr", "Français"), ("de", "Deutsch"), ("es", "Español")]
 VERSIONE = "1.1"
 # Link di donazione (lasciare vuoto finche' non sono pronti: il pulsante mostra "a breve"). Esempi: "https://paypal.me/NOME", "https://revolut.me/NOME"
-DONA = {"PayPal": "https://paypal.me/IDQdeveloper", "Revolut": ""}
+DONA = {"PayPal": "https://paypal.me/IDQdeveloper", "Revolut": "https://revolut.me/paolox0hv"}
 # (chiave testo sistema, chiave nota, file, icona)
 FILE = [
  ("os_android", "n_android", f"downloads/{VERSIONE}/IDQ-Monitor-User-{VERSIONE}.apk", "🤖"),
