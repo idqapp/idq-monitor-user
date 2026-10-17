@@ -14,12 +14,12 @@ DONA = {"PayPal": "https://paypal.me/IDQdeveloper", "Revolut": "https://revolut.
 FILE = [   # (chiave etichetta, icona, file; None = popup "presto su Google Play")
  ("per_win", "win", f"downloads/{VERSIONE}/IDQ-Monitor-User-Setup-Windows.exe"),
  ("per_linux", "linux", f"downloads/{VERSIONE}/idq-monitor-user_{VERSIONE}_amd64.deb"),
- ("per_rpi", "rpi", f"downloads/{VERSIONE}/idq-monitor-user_{VERSIONE}_arm64.deb"),
+ ("per_rpi", "rpi", f"downloads/{VERSIONE}/idq-monitor-user_{VERSIONE}_arm64.deb", "sub_rpi"),
  ("per_mac1", "mac", f"downloads/{VERSIONE}/IDQ-Monitor-User-macOS-arm64.zip"),
  ("per_mac2", "mac", f"downloads/{VERSIONE}/IDQ-Monitor-User-macOS-x64.zip"),
  ("per_android", "android", None),
  ("per_ios", "ios", f"downloads/{VERSIONE}/IDQ-Monitor-User-iOS-non-firmato.ipa"),
- ("per_srv", "srv", "downloads/idq-monitor-server.zip"),
+ ("per_srv", "srv", "downloads/idq-monitor-server.zip", "sub_srv"),
 ]
 ICONE = {   # icone semplici disegnate a mano (nessuna risorsa esterna)
  "win": '<svg viewBox="0 0 48 48"><path d="M5 9l17-2.4V23H5zM25 6.2L43 3.5V23H25zM5 25h17v16.4L5 39zM25 25h18v19.6L25 42z"/></svg>',
@@ -54,7 +54,7 @@ h2{margin:46px 0 14px;font-size:26px}h3{margin:18px 0 6px;font-size:18px}
 .shot{text-align:center}.shot img{max-width:100%;width:380px;border-radius:14px;border:1px solid var(--bd)}.shot small,.mu{color:var(--mu)}
 table.dl{width:100%;border-collapse:separate;border-spacing:0 10px}table.dl td{background:var(--card);padding:12px 14px;vertical-align:middle}table.dl td:first-child{border-radius:14px 0 0 14px;width:56px;font-size:26px;text-align:center}table.dl td:last-child{border-radius:0 14px 14px 0;text-align:right;white-space:nowrap}
 table.dl .nome{font-weight:700}table.dl .nota{color:var(--mu);font-size:14px;line-height:1.4}
-.os-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:14px 0}.os{display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px 10px;text-decoration:none;color:var(--tx);text-align:center}.os:hover{border-color:var(--ac)}.os svg{width:56px;height:56px;fill:currentColor;color:var(--ac)}.os .et{font-weight:700;font-size:15px}.os small{color:var(--mu)}
+.os-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:14px 0}.os{display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px 10px;text-decoration:none;color:var(--tx);text-align:center}.os:hover{border-color:var(--ac)}.os svg{width:56px;height:56px;fill:currentColor;color:var(--ac)}.os .et{font-weight:700;font-size:15px}.os small{color:var(--mu)}.os .sub{font-size:12px;line-height:1.3}
 .pop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);align-items:center;justify-content:center;z-index:9;padding:16px}.pop.on{display:flex}.pop .box{background:var(--bg);border-radius:16px;padding:22px;max-width:360px;text-align:center}.pop button{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:9px 22px;font-size:16px;cursor:pointer}
 .btn{display:inline-block;background:var(--ac);color:#fff;border-radius:10px;padding:9px 16px;text-decoration:none;font-weight:600}.btn small{opacity:.85;font-weight:400}
 @media(max-width:640px){table.dl td:last-child{display:block;text-align:left;border-radius:0 0 14px 14px}table.dl td:nth-child(2){border-radius:0 14px 0 0}table.dl td:first-child{border-radius:14px 0 0 0;display:inline-block}table.dl tr{display:block}}
@@ -92,9 +92,10 @@ def indice():
     h += '<h2>%s</h2><div class="shot">%s<br><small>%s</small></div>' % (L("h_screen"), "".join('<img class="l" data-l="%s" src="img/app-%s.jpg" alt="IDQ Monitor User">' % (l, l) for l, _ in LING), L("screen_n"))
     h += '<h2 id="download">%s</h2><p class="mu">%s · %s %s</p>' % (L("h_download"), L("d_intro"), L("d_versione"), VERSIONE)
     h += '<div class="os-grid">'
-    for chiave, icona, percorso in FILE:
+    for voce in FILE:
+        chiave, icona, percorso = voce[:3]; sub = ('<small class="sub">%s</small>' % L(voce[3])) if len(voce) > 3 else ''
         if percorso is None: h += '<a class="os" href="#" id="os-android">%s<span class="et">%s</span><small>Google Play</small></a>' % (ICONE[icona], L(chiave))
-        else: h += '<a class="os" href="%s" download="%s">%s<span class="et">%s</span><small>%s</small></a>' % (percorso, os.path.basename(percorso), ICONE[icona], L(chiave), mb(percorso))
+        else: h += '<a class="os" href="%s" download="%s">%s<span class="et">%s</span>%s<small>%s</small></a>' % (percorso, os.path.basename(percorso), ICONE[icona], L(chiave), sub, mb(percorso))
     h += '</div><details class="note"><summary>%s</summary>%s</details>' % (L("note_inst"), "".join('<p><b>%s</b>: %s</p>' % (L(c), L(n)) for c, n in (("per_win", "n_win"), ("per_linux", "n_deb"), ("per_rpi", "n_rpi"), ("per_mac1", "n_mac"), ("per_ios", "n_ios"), ("per_srv", "n_srv"))))
     h += '<div class="pop" id="pop"><div class="box"><b>%s</b><p>%s</p><button id="pop-ok" type="button">%s</button></div></div>' % (L("pop_t"), L("pop_m"), L("pop_ok"))
     h += '<h2 id="prova">%s</h2><p>%s</p><h2>%s</h2><p>%s</p><p><a class="btn" data-g="guida.html" href="guida.html">%s</a></p>' % (L("h_prova"), L("p_prova"), L("h_server"), L("p_server"), L("cta_guida"))

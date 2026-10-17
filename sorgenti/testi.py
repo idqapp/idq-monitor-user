@@ -69,3 +69,9 @@ T.update({
 })
 
 T["note_inst"] = ("Note sull'installazione", "Installation notes", "Notes d'installation", "Hinweise zur Installation", "Notas de instalación")
+
+T.update({
+"per_srv": ("Programma server", "Server program", "Programme serveur", "Server-Programm", "Programa servidor"),
+"sub_rpi": ("Pi 5, 4, 400, 3, 3+, Zero 2 W (sistema a 64 bit)", "Pi 5, 4, 400, 3, 3+, Zero 2 W (64-bit system)", "Pi 5, 4, 400, 3, 3+, Zero 2 W (système 64 bits)", "Pi 5, 4, 400, 3, 3+, Zero 2 W (64-Bit-System)", "Pi 5, 4, 400, 3, 3+, Zero 2 W (sistema de 64 bits)"),
+"sub_srv": ("Per avere il tuo server: da installare su un computer Linux sempre acceso (serve dopo la prova di 24 ore)", "To run your own server: install it on an always-on Linux computer (needed after the 24-hour trial)", "Pour avoir votre serveur : à installer sur un ordinateur Linux toujours allumé (nécessaire après l'essai de 24 h)", "Für deinen eigenen Server: auf einem ständig laufenden Linux-Computer installieren (nötig nach dem 24-Stunden-Test)", "Para tener tu servidor: instálalo en un ordenador Linux siempre encendido (hace falta tras la prueba de 24 horas)"),
+})
