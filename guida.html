@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="it" data-l="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IDQ Monitor User - Guida</title>
+<style>
+:root{color-scheme:light dark;--bg:#fff;--tx:#17212b;--mu:#5b6b7a;--card:#f1f5f9;--ac:#1d5fa8;--ok:#177a45;--no:#c0392b;--cd:#0f1720;--cdt:#e8eef5}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1720;--tx:#e8eef5;--mu:#8aa0b5;--card:#18232f;--ac:#6fa8dc;--ok:#3ddc84;--no:#ff5252;--cd:#0a1118;--cdt:#e8eef5}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,sans-serif}
+main{max-width:860px;margin:0 auto;padding:12px 16px 60px}
+.lingue{display:flex;gap:6px;flex-wrap:wrap;padding:10px 0}.lingue button{border:1px solid var(--card);background:var(--card);color:var(--tx);border-radius:999px;padding:6px 12px;cursor:pointer;font:inherit;font-size:14px}.lingue button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+h1{font-size:28px;margin:6px 0 4px}h2{font-size:22px;margin:34px 0 8px;padding-top:8px;border-top:1px solid var(--card)}h3{font-size:17px;margin:20px 0 6px}
+p,li{margin:6px 0}a{color:var(--ac)}.sub{color:var(--mu)}
+nav{background:var(--card);border-radius:12px;padding:10px 16px;margin:14px 0}nav ol{margin:6px 0;padding-left:22px}
+pre{background:var(--cd);color:var(--cdt);padding:12px 14px;border-radius:10px;overflow-x:auto;font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace}code{background:var(--card);padding:1px 5px;border-radius:5px;font:90% ui-monospace,Menlo,Consolas,monospace}pre code{background:none;padding:0}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:15px}th,td{border:1px solid var(--card);padding:7px 9px;text-align:left;vertical-align:top}th{background:var(--card)}
+.nota{border-left:4px solid var(--ac);background:var(--card);padding:8px 12px;border-radius:6px;margin:12px 0}.att{border-left:4px solid var(--no);background:var(--card);padding:8px 12px;border-radius:6px;margin:12px 0}
+pre.sch{background:var(--card);color:var(--tx)}
+.l{display:none}html[data-l=it] .l[data-l=it],html[data-l=en] .l[data-l=en],html[data-l=fr] .l[data-l=fr],html[data-l=de] .l[data-l=de],html[data-l=es] .l[data-l=es]{display:block}
+</style>
+</head>
+<body><main>
+<div class="lingue"><button data-l="it">Italiano</button><button data-l="en">English</button><button data-l="fr">Français</button><button data-l="de">Deutsch</button><button data-l="es">Español</button></div>
+<div class="l" data-l="it"><h1>IDQ Monitor User - Guida completa</h1><p class="sub">Come funziona, come si prova e come avere il tuo server, passo passo.</p><nav><b>Indice</b><ol><li><a href="#it-cos">Cos&#x27;è IDQ Monitor User</a></li><li><a href="#it-prova">La prova gratuita di 24 ore</a></li><li><a href="#it-server">Come avere il tuo server (passo passo)</a></li><li><a href="#it-uso">Come si usa</a></li><li><a href="#it-agente">Gli agenti nel dettaglio</a></li><li><a href="#it-problemi">Se qualcosa non funziona</a></li><li><a href="#it-privacy">Privacy e contatti</a></li></ol></nav><h2 id="it-cos">1. Cos&#x27;è IDQ Monitor User</h2>
+<p>IDQ Monitor User mostra in tempo reale lo stato dei tuoi computer: processore (con ogni core), carico, memoria, swap, dischi e partizioni, rete, temperature, servizi attivi, aggiornamenti e manutenzione. Se qualcosa non va, ti avvisa sul telefono.</p>
+<p>Funziona con tre pezzi:</p>
+<ul>
+<li><b>L'app</b> (Android, iPhone e iPad, Windows, Mac, Linux e pagina web) che mostra i dati.</li>
+<li><b>Un server</b>: un computer sempre acceso che raccoglie i dati e li rende disponibili all'app, anche fuori casa.</li>
+<li><b>Un agente</b> su ogni computer da controllare: un piccolo programma che manda i dati al server.</li>
+</ul>
+<pre class="sch">  Tuoi computer ──(agente)──►  IL TUO SERVER  ◄──  App (telefono, tablet, PC, web)</pre>
+<h2 id="it-prova">2. La prova gratuita di 24 ore</h2>
+<p>Alla prima apertura l'app ti propone una <b>prova gratuita di 24 ore</b> sul server IDQ, senza registrazione:</p>
+<ul>
+<li>vedi subito un <b>PC dimostrativo</b> con dati di esempio;</li>
+<li>se vuoi, puoi collegare anche i <b>tuoi PC</b> (menu → <i>Aggiungi dispositivo</i>) e vederli per tutta la prova;</li>
+<li>la prova dura <b>24 ore dal primo avvio</b> e si può fare <b>una sola volta per dispositivo</b> (reinstallare l'app non la fa ripartire);</li>
+<li>passate le 24 ore l'app si ferma e chiede il <b>tuo server</b>: qui sotto trovi come averlo. Lo spazio di prova viene poi cancellato.</li>
+</ul>
+<p>Durante la prova il riavvio da remoto dei PC non è disponibile. Il PC dimostrativo non è un computer vero: serve solo a vedere come funziona l'app.</p>
+<h2 id="it-server">3. Come avere il tuo server (passo passo)</h2>
+<p>Dopo la prova, o se preferisci non usare il server IDQ, ti serve un <b>tuo server</b>. È gratuito e semplice: bastano un computer sempre acceso e circa 20 minuti.</p>
+<h3>Passo 1 - Cosa serve</h3>
+<ul>
+<li>Un <b>computer sempre acceso con Linux</b> (Ubuntu, Debian, Raspberry Pi OS…): per esempio un Raspberry Pi 4, un mini PC o un vecchio portatile. Consuma pochissimo.</li>
+<li>Una connessione a internet. Non serve aprire porte sul router.</li>
+<li><b>Python 3</b> (già presente nella maggior parte dei Linux) <i>oppure</i> Docker.</li>
+</ul>
+<div class="nota">Il server legge il computer su cui gira (processore, memoria, dischi…). Windows e Mac possono essere <i>controllati</i> con l'agente, ma il server va su Linux.</div>
+<h3>Passo 2 - Scarica il pacchetto del server</h3>
+<p>Dal sito di IDQ Monitor User scarica <b>idq-monitor-server.zip</b> (sezione <i>Download → Server</i>). Sul computer del server:</p>
+<pre><code>unzip idq-monitor-server.zip
+cd idq-monitor-server</code></pre>
+<h3>Passo 3 - Avvia il server</h3>
+<p><b>Metodo A - senza Docker (il più semplice):</b></p>
+<pre><code>python3 idq_monitor_server.py</code></pre>
+<p>Per farlo partire da solo a ogni accensione, crea un servizio:</p>
+<pre><code>sudo tee /etc/systemd/system/idq-monitor-server.service &lt;&lt;EOF
+[Unit]
+Description=IDQ Monitor server
+After=network-online.target
+
+[Service]
+WorkingDirectory=$PWD
+ExecStart=/usr/bin/python3 $PWD/idq_monitor_server.py
+User=$USER
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+sudo systemctl daemon-reload
+sudo systemctl enable --now idq-monitor-server</code></pre>
+<p><b>Metodo B - con Docker:</b></p>
+<pre><code>docker compose up -d</code></pre>
+<p>Alla prima accensione il server crea la chiave di accesso (il <i>token</i>) nella cartella <code>dati</code>. Per leggerla:</p>
+<pre><code>cat dati/monitor.token</code></pre>
+<h3>Passo 4 - Raggiungi il server da internet (gratis)</h3>
+<p>Le app usano un indirizzo sicuro (<code>https://…</code>). Scegli <b>una</b> di queste strade gratuite:</p>
+<ul>
+<li><b>Tailscale Funnel</b> (la più semplice, nessun dominio necessario): crea un account gratuito su tailscale.com, installa Tailscale sul server, attiva Funnel nelle impostazioni del tuo account e lancia:
+<pre><code>sudo tailscale funnel --bg 8002</code></pre>
+Ottieni un indirizzo stabile del tipo <code>https://nome-pc.tuarete.ts.net</code>.</li>
+<li><b>Cloudflare Tunnel</b> (se hai un tuo dominio su Cloudflare): nel pannello <i>Zero Trust → Networks → Tunnels</i> crea un tunnel, installa il connettore sul server con il comando che ti mostra, poi aggiungi un <i>Public hostname</i> (per esempio <code>monitor.tuodominio.it</code>) che punta a <code>http://localhost:8002</code>.</li>
+</ul>
+<h3>Passo 5 - Il tuo link</h3>
+<p>Il link da usare nelle app è l'indirizzo del passo 4 seguito da <code>/monitor?k=</code> e dal token:</p>
+<pre><code>https://YOUR-ADDRESS/monitor?k=YOUR-TOKEN</code></pre>
+<div class="att">Il link contiene la chiave di accesso: <b>non condividerlo</b>. Chi lo ha può vedere i tuoi dati.</div>
+<h3>Passo 6 - Collega l'app</h3>
+<p>Nell'app apri il menu (tre trattini) → <b>Cambia link</b> e incolla il link. Se l'app è nella schermata di prova terminata, scegli <i>Ho già il mio server</i>.</p>
+<h3>Passo 7 - Aggiungi i tuoi computer</h3>
+<p>Nell'app: menu → <b>Aggiungi dispositivo…</b>, scrivi un nome e copia il comando. Sul computer da controllare incollalo:</p>
+<ul>
+<li><b>Linux, Raspberry, Mac</b>: nel Terminale (comando <code>curl … | bash</code>).</li>
+<li><b>Windows</b>: in PowerShell (comando <code>irm … | iex</code>).</li>
+</ul>
+<p>Dopo pochi secondi il computer compare in alto nell'app. Il comando installa l'agente e lo fa partire a ogni accensione. In alternativa usa gli <b>installer</b> del sito (Windows, Ubuntu, Raspberry, Mac).</p>
+<h3>Passo 8 - Personalizza</h3>
+<p>Dal menu scegli quali <b>sezioni</b> vedere, quali <b>servizi</b> controllare e quali <b>allarmi</b> ricevere (con le soglie). Facoltativo: attiva il <b>riavvio da remoto</b> con un PIN.</p>
+<h2 id="it-uso">4. Come si usa</h2>
+<ul>
+<li><b>Schede in alto</b>: una per ogni computer. Il nome è <b>verde</b> se è acceso e <b>rosso</b> se è spento o non raggiungibile; sotto compare "attivo" o "spento".</li>
+<li><b>Una sola pagina</b>: attività, processore con ogni core, memoria, dischi, rete, temperature, servizi. Le voci si adattano allo schermo o alla finestra.</li>
+<li><b>Menu</b>: sezioni da visualizzare, allarmi e avvisi, servizi da visualizzare, aggiungi dispositivo, PIN del riavvio, guida, informazioni, cambia link.</li>
+<li><b>Widget</b> (Android): tieni premuto sulla schermata Home e scegli <i>IDQ Monitor</i>.</li>
+</ul>
+<h3>Avvisi</h3>
+<p>Sull'app Android il controllo in background (circa ogni 30 secondi) ti manda una notifica quando c'è un allarme: processore, carico, memoria, swap, disco o temperatura oltre la soglia che hai scelto, servizio arrestato in modo anomalo, computer spento all'improvviso o server non raggiungibile. Uno <b>spegnimento normale</b> di un computer non genera avvisi. Su Android, nel menu, consenti <i>senza limiti di batteria</i> per non far fermare il controllo.</p>
+<p>Su iPhone e iPad il sistema decide ogni quanto l'app può controllare (di solito ogni 15-60 minuti). Sulle app per computer gli allarmi si vedono solo dentro l'app, senza popup.</p>
+<h3>Servizi: attivo, fermo, arrestato</h3>
+<p>L'agente distingue un servizio <b>fermo</b> (spento in modo normale: nessun avviso) da uno <b>arrestato</b> in modo anomalo (errore, crash, memoria esaurita: avviso).</p>
+<h3>Aggiornamenti e riavvii</h3>
+<p>Se ci sono aggiornamenti che richiedono un riavvio, l'app te lo segnala e, se hai attivato il riavvio da remoto, compare <b>Riavvia ora…</b> (serve il PIN). Gli aggiornamenti automatici dei computer Linux possono essere programmati di notte (02:00-02:45) con riavvio alle 02:30.</p>
+<h3>Il PIN del riavvio</h3>
+<p>Al primo avvio l'app chiede se vuoi poter riavviare i computer dall'app. Se accetti scegli un PIN di 4-8 cifre; dal menu puoi modificarlo, ripristinarlo o disattivarlo (<b>a tuo rischio e pericolo</b>: senza PIN nessuno può riavviare i computer da remoto). Dopo 5 PIN sbagliati c'è un blocco di 5 minuti. Il PIN lo controlla il tuo server: non è nell'app.</p>
+<h3>Manutenzione dichiarata</h3>
+<p>Per avvisare l'app che stai facendo dei lavori su un computer Linux o Mac, scrivi una frase nel file <code>~/.config/idq-monitor-manutenzione</code>: comparirà nella scheda <i>Attività</i>. Cancella il file a fine lavori.</p>
+<h2 id="it-agente">5. Gli agenti nel dettaglio</h2>
+<p>Il file di configurazione dell'agente è <code>~/.config/idq-monitor-agente.json</code> (Windows: <code>%APPDATA%\idq-monitor-agente.json</code>). Puoi indicare i servizi da mostrare per impostazione predefinita:</p>
+<pre><code>{
+  &quot;link&quot;: &quot;https://YOUR-ADDRESS/monitor?k=YOUR-TOKEN&quot;,
+  &quot;nome&quot;: &quot;raspberry&quot;,
+  &quot;docker_tutti&quot;: true,
+  &quot;servizi&quot;: {
+    &quot;Web&quot;:    { &quot;porta&quot;: 80,   &quot;systemd&quot;: &quot;nginx&quot; },
+    &quot;Cloud&quot;:  { &quot;porta&quot;: 8080, &quot;docker&quot;: &quot;nextcloud&quot; },
+    &quot;Backup&quot;: 5000
+  }
+}</code></pre>
+<ul>
+<li><code>porta</code>: porta locale che deve rispondere; <code>systemd</code>: nome del servizio (Linux); <code>docker</code>: nome del contenitore; <code>docker_tutti</code>: mostra tutti i contenitori.</li>
+<li>Un servizio appena avviato ha 5 minuti di tolleranza prima di essere considerato anomalo.</li>
+</ul>
+<p>Per togliere un computer: ferma l'agente (Linux: <code>systemctl --user disable --now idq-monitor-agente</code>; Windows: <code>Unregister-ScheduledTask -TaskName IDQMonitorAgente -Confirm:$false</code>; Mac: <code>launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/it.idq.monitor-agente.plist</code>).</p>
+<h2 id="it-problemi">6. Se qualcosa non funziona</h2>
+<table>
+<tr><th>Problema</th><th>Cosa fare</th></tr>
+<tr><td>L'app dice "Connessione al server…"</td><td>Controlla la rete del telefono, che il server sia acceso e che il link sia giusto (menu → Cambia link).</td></tr>
+<tr><td>Il computer non compare</td><td>Controlla che l'agente sia attivo e rilancia il comando di <i>Aggiungi dispositivo</i>. Su Linux: <code>journalctl --user -u idq-monitor-agente -n 20</code>.</td></tr>
+<tr><td>Errore 403</td><td>Il link o il token non è corretto: copialo di nuovo dal server (<code>cat dati/monitor.token</code>).</td></tr>
+<tr><td>Le notifiche non arrivano</td><td>Su Android consenti le notifiche e l'uso senza limiti di batteria; sui Samsung togli l'app dalle "applicazioni in stop".</td></tr>
+<tr><td>PIN dimenticato</td><td>Sul server cancella <code>dati/monitor.pin</code> e riavvia il server: l'app ti chiederà di sceglierne uno nuovo.</td></tr>
+<tr><td>Prova terminata</td><td>Segui il passo "Come avere il tuo server" e scegli <i>Ho già il mio server</i>.</td></tr>
+</table>
+<h2 id="it-privacy">7. Privacy e contatti</h2>
+<p>L'app non ha account, non ha pubblicità e non usa strumenti di analisi. Con il tuo server, i dati dei tuoi computer restano tra i tuoi computer, il tuo server e le tue app. Nella prova di 24 ore i dati vanno sul server IDQ e vengono cancellati alla scadenza. Tutti i dettagli sono nell'<a href="privacy.html">informativa sulla privacy</a>.</p>
+<p>Sviluppatore: IDQ Developer · <a href="mailto:info.idq.26@gmail.com">info.idq.26@gmail.com</a></p>
+</div>
+<div class="l" data-l="en"><h1>IDQ Monitor User - Complete guide</h1><p class="sub">How it works, how to try it and how to get your own server, step by step.</p><nav><b>Contents</b><ol><li><a href="#en-cos">What IDQ Monitor User is</a></li><li><a href="#en-prova">The free 24-hour trial</a></li><li><a href="#en-server">How to get your own server (step by step)</a></li><li><a href="#en-uso">How to use it</a></li><li><a href="#en-agente">The agents in detail</a></li><li><a href="#en-problemi">If something doesn&#x27;t work</a></li><li><a href="#en-privacy">Privacy and contacts</a></li></ol></nav><h2 id="en-cos">1. What IDQ Monitor User is</h2>
+<p>IDQ Monitor User shows the status of your computers in real time: processor (every single core), load, memory, swap, disks and partitions, network, temperatures, running services, updates and maintenance. If something is wrong, it alerts you on your phone.</p>
+<p>It works with three parts:</p>
+<ul>
+<li><b>The app</b> (Android, iPhone and iPad, Windows, Mac, Linux and a web page) that shows the data.</li>
+<li><b>A server</b>: an always-on computer that collects the data and makes it available to the app, even when you're away from home.</li>
+<li><b>An agent</b> on every computer you want to monitor: a small program that sends the data to the server.</li>
+</ul>
+<pre class="sch">  Your computers ──(agent)──►  YOUR SERVER  ◄──  App (phone, tablet, PC, web)</pre>
+<h2 id="en-prova">2. The free 24-hour trial</h2>
+<p>The first time you open the app it offers a <b>free 24-hour trial</b> on the IDQ server, with no sign-up:</p>
+<ul>
+<li>you immediately see a <b>demo PC</b> with sample data;</li>
+<li>if you like, you can also connect <b>your own PCs</b> (menu → <i>Add device</i>) and watch them for the whole trial;</li>
+<li>the trial lasts <b>24 hours from the first launch</b> and can be done <b>only once per device</b> (reinstalling the app does not restart it);</li>
+<li>after 24 hours the app stops and asks for <b>your own server</b>: below you'll find how to get one. The trial space is then deleted.</li>
+</ul>
+<p>During the trial, remote restart of PCs is not available. The demo PC is not a real computer: it only shows how the app works.</p>
+<h2 id="en-server">3. How to get your own server (step by step)</h2>
+<p>After the trial, or if you prefer not to use the IDQ server, you need <b>your own server</b>. It's free and simple: all you need is an always-on computer and about 20 minutes.</p>
+<h3>Step 1 - What you need</h3>
+<ul>
+<li>An <b>always-on computer running Linux</b> (Ubuntu, Debian, Raspberry Pi OS…): for example a Raspberry Pi 4, a mini PC or an old laptop. It uses very little power.</li>
+<li>An internet connection. You don't need to open any router ports.</li>
+<li><b>Python 3</b> (already present on most Linux systems) <i>or</i> Docker.</li>
+</ul>
+<div class="nota">The server reads the computer it runs on (processor, memory, disks…). Windows and Mac can be <i>monitored</i> with the agent, but the server itself should run on Linux.</div>
+<h3>Step 2 - Download the server package</h3>
+<p>From the IDQ Monitor User website download <b>idq-monitor-server.zip</b> (section <i>Download → Server</i>). On the server computer:</p>
+<pre><code>unzip idq-monitor-server.zip
+cd idq-monitor-server</code></pre>
+<h3>Step 3 - Start the server</h3>
+<p><b>Method A - without Docker (the simplest):</b></p>
+<pre><code>python3 idq_monitor_server.py</code></pre>
+<p>To make it start by itself at every boot, create a service:</p>
+<pre><code>sudo tee /etc/systemd/system/idq-monitor-server.service &lt;&lt;EOF
+[Unit]
+Description=IDQ Monitor server
+After=network-online.target
+
+[Service]
+WorkingDirectory=$PWD
+ExecStart=/usr/bin/python3 $PWD/idq_monitor_server.py
+User=$USER
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+sudo systemctl daemon-reload
+sudo systemctl enable --now idq-monitor-server</code></pre>
+<p><b>Method B - with Docker:</b></p>
+<pre><code>docker compose up -d</code></pre>
+<p>On first start the server creates the access key (the <i>token</i>) in the <code>dati</code> folder. To read it:</p>
+<pre><code>cat dati/monitor.token</code></pre>
+<h3>Step 4 - Reach the server from the internet (free)</h3>
+<p>The apps use a secure address (<code>https://…</code>). Choose <b>one</b> of these free options:</p>
+<ul>
+<li><b>Tailscale Funnel</b> (the simplest, no domain needed): create a free account at tailscale.com, install Tailscale on the server, enable Funnel in your account settings and run:
+<pre><code>sudo tailscale funnel --bg 8002</code></pre>
+You get a stable address like <code>https://pc-name.yournet.ts.net</code>.</li>
+<li><b>Cloudflare Tunnel</b> (if you own a domain on Cloudflare): in <i>Zero Trust → Networks → Tunnels</i> create a tunnel, install the connector on the server with the command shown, then add a <i>Public hostname</i> (for example <code>monitor.yourdomain.com</code>) pointing to <code>http://localhost:8002</code>.</li>
+</ul>
+<h3>Step 5 - Your link</h3>
+<p>The link to use in the apps is the address from step 4 followed by <code>/monitor?k=</code> and the token:</p>
+<pre><code>https://YOUR-ADDRESS/monitor?k=YOUR-TOKEN</code></pre>
+<div class="att">The link contains the access key: <b>don't share it</b>. Anyone who has it can see your data.</div>
+<h3>Step 6 - Connect the app</h3>
+<p>In the app open the menu (three lines) → <b>Change link</b> and paste the link. If the app is on the trial-ended screen, choose <i>I already have my server</i>.</p>
+<h3>Step 7 - Add your computers</h3>
+<p>In the app: menu → <b>Add device…</b>, type a name and copy the command. On the computer you want to monitor paste it:</p>
+<ul>
+<li><b>Linux, Raspberry, Mac</b>: in the Terminal (the <code>curl … | bash</code> command).</li>
+<li><b>Windows</b>: in PowerShell (the <code>irm … | iex</code> command).</li>
+</ul>
+<p>After a few seconds the computer appears at the top of the app. The command installs the agent and starts it at every boot. Alternatively use the <b>installers</b> on the website (Windows, Ubuntu, Raspberry, Mac).</p>
+<h3>Step 8 - Customise</h3>
+<p>From the menu choose which <b>sections</b> to see, which <b>services</b> to monitor and which <b>alarms</b> to receive (with thresholds). Optional: turn on <b>remote restart</b> with a PIN.</p>
+<h2 id="en-uso">4. How to use it</h2>
+<ul>
+<li><b>Tabs at the top</b>: one per computer. The name is <b>green</b> if it's on and <b>red</b> if it's off or unreachable; below it says "active" or "off".</li>
+<li><b>A single page</b>: activity, processor with every core, memory, disks, network, temperatures, services. Items adapt to the screen or window.</li>
+<li><b>Menu</b>: sections to display, alarms and alerts, services to display, add device, restart PIN, guide, about, change link.</li>
+<li><b>Widget</b> (Android): long-press the home screen and choose <i>IDQ Monitor</i>.</li>
+</ul>
+<h3>Alerts</h3>
+<p>On the Android app the background check (about every 30 seconds) sends a notification when there is an alarm: processor, load, memory, swap, disk or temperature above the threshold you chose, a service stopped abnormally, a computer suddenly off, or the server unreachable. A <b>normal shutdown</b> of a computer does not trigger alerts. On Android, in the menu, allow <i>without battery limits</i> so the check is not stopped.</p>
+<p>On iPhone and iPad the system decides how often the app can check (usually every 15-60 minutes). On the computer apps, alarms are shown only inside the app, with no popups.</p>
+<h3>Services: active, stopped, failed</h3>
+<p>The agent tells a <b>stopped</b> service (turned off normally: no alert) from one that <b>failed</b> abnormally (error, crash, out of memory: alert).</p>
+<h3>Updates and restarts</h3>
+<p>If there are updates that require a restart, the app tells you and, if you turned on remote restart, <b>Restart now…</b> appears (the PIN is required). Automatic updates on Linux computers can be scheduled at night (02:00-02:45) with a restart at 02:30.</p>
+<h3>The restart PIN</h3>
+<p>On first launch the app asks whether you want to be able to restart your computers from the app. If you accept, choose a PIN of 4-8 digits; from the menu you can change, reset or turn it off (<b>at your own risk</b>: without a PIN nobody can restart computers remotely). After 5 wrong PINs there is a 5-minute lock. The PIN is checked by your server: it is not in the app.</p>
+<h3>Declared maintenance</h3>
+<p>To tell the app you are working on a Linux or Mac computer, write a sentence in the file <code>~/.config/idq-monitor-manutenzione</code>: it will appear in the <i>Activity</i> card. Delete the file when you're done.</p>
+<h2 id="en-agente">5. The agents in detail</h2>
+<p>The agent's configuration file is <code>~/.config/idq-monitor-agente.json</code> (Windows: <code>%APPDATA%\idq-monitor-agente.json</code>). You can list the services to show by default:</p>
+<pre><code>{
+  &quot;link&quot;: &quot;https://YOUR-ADDRESS/monitor?k=YOUR-TOKEN&quot;,
+  &quot;nome&quot;: &quot;raspberry&quot;,
+  &quot;docker_tutti&quot;: true,
+  &quot;servizi&quot;: {
+    &quot;Web&quot;:    { &quot;porta&quot;: 80,   &quot;systemd&quot;: &quot;nginx&quot; },
+    &quot;Cloud&quot;:  { &quot;porta&quot;: 8080, &quot;docker&quot;: &quot;nextcloud&quot; },
+    &quot;Backup&quot;: 5000
+  }
+}</code></pre>
+<ul>
+<li><code>porta</code>: local port that must respond; <code>systemd</code>: service name (Linux); <code>docker</code>: container name; <code>docker_tutti</code>: show all containers.</li>
+<li>A service that has just started gets 5 minutes of grace before being considered abnormal.</li>
+</ul>
+<p>To remove a computer: stop the agent (Linux: <code>systemctl --user disable --now idq-monitor-agente</code>; Windows: <code>Unregister-ScheduledTask -TaskName IDQMonitorAgente -Confirm:$false</code>; Mac: <code>launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/it.idq.monitor-agente.plist</code>).</p>
+<h2 id="en-problemi">6. If something doesn&#x27;t work</h2>
+<table>
+<tr><th>Problem</th><th>What to do</th></tr>
+<tr><td>The app says "Connecting to the server…"</td><td>Check the phone's network, that the server is on and that the link is correct (menu → Change link).</td></tr>
+<tr><td>The computer doesn't appear</td><td>Check that the agent is running and run the <i>Add device</i> command again. On Linux: <code>journalctl --user -u idq-monitor-agente -n 20</code>.</td></tr>
+<tr><td>Error 403</td><td>The link or token is wrong: copy it again from the server (<code>cat dati/monitor.token</code>).</td></tr>
+<tr><td>Notifications don't arrive</td><td>On Android allow notifications and use without battery limits; on Samsung remove the app from "sleeping apps".</td></tr>
+<tr><td>Forgotten PIN</td><td>On the server delete <code>dati/monitor.pin</code> and restart the server: the app will ask you to choose a new one.</td></tr>
+<tr><td>Trial ended</td><td>Follow the "How to get your own server" steps and choose <i>I already have my server</i>.</td></tr>
+</table>
+<h2 id="en-privacy">7. Privacy and contacts</h2>
+<p>The app has no accounts, no ads and uses no analytics tools. With your own server, your computers' data stays between your computers, your server and your apps. During the 24-hour trial the data goes to the IDQ server and is deleted at expiry. Full details are in the <a href="privacy.html">privacy policy</a>.</p>
+<p>Developer: IDQ Developer · <a href="mailto:info.idq.26@gmail.com">info.idq.26@gmail.com</a></p>
+</div>
+<div class="l" data-l="fr"><h1>IDQ Monitor User - Guide complet</h1><p class="sub">Comment ça marche, comment l&#x27;essayer et comment avoir votre propre serveur, pas à pas.</p><nav><b>Sommaire</b><ol><li><a href="#fr-cos">Qu&#x27;est-ce qu&#x27;IDQ Monitor User</a></li><li><a href="#fr-prova">L&#x27;essai gratuit de 24 heures</a></li><li><a href="#fr-server">Comment avoir votre propre serveur (pas à pas)</a></li><li><a href="#fr-uso">Comment l&#x27;utiliser</a></li><li><a href="#fr-agente">Les agents en détail</a></li><li><a href="#fr-problemi">Si quelque chose ne fonctionne pas</a></li><li><a href="#fr-privacy">Confidentialité et contacts</a></li></ol></nav><h2 id="fr-cos">1. Qu&#x27;est-ce qu&#x27;IDQ Monitor User</h2>
+<p>IDQ Monitor User affiche en temps réel l'état de vos ordinateurs : processeur (chaque cœur), charge, mémoire, swap, disques et partitions, réseau, températures, services actifs, mises à jour et maintenance. En cas de problème, il vous alerte sur votre téléphone.</p>
+<p>Il repose sur trois éléments :</p>
+<ul>
+<li><b>L'application</b> (Android, iPhone et iPad, Windows, Mac, Linux et page web) qui affiche les données.</li>
+<li><b>Un serveur</b> : un ordinateur toujours allumé qui collecte les données et les met à disposition de l'application, même hors de chez vous.</li>
+<li><b>Un agent</b> sur chaque ordinateur à surveiller : un petit programme qui envoie les données au serveur.</li>
+</ul>
+<pre class="sch">  Vos ordinateurs ──(agent)──►  VOTRE SERVEUR  ◄──  Application (téléphone, tablette, PC, web)</pre>
+<h2 id="fr-prova">2. L&#x27;essai gratuit de 24 heures</h2>
+<p>À la première ouverture, l'application vous propose un <b>essai gratuit de 24 heures</b> sur le serveur IDQ, sans inscription :</p>
+<ul>
+<li>vous voyez tout de suite un <b>PC de démonstration</b> avec des données d'exemple ;</li>
+<li>si vous le souhaitez, vous pouvez aussi connecter <b>vos propres PC</b> (menu → <i>Ajouter un appareil</i>) et les voir pendant tout l'essai ;</li>
+<li>l'essai dure <b>24 heures à partir du premier lancement</b> et ne peut se faire qu'<b>une seule fois par appareil</b> (réinstaller l'application ne le relance pas) ;</li>
+<li>passé ce délai, l'application s'arrête et demande <b>votre serveur</b> : vous trouverez ci-dessous comment l'avoir. L'espace d'essai est ensuite supprimé.</li>
+</ul>
+<p>Pendant l'essai, le redémarrage à distance des PC n'est pas disponible. Le PC de démonstration n'est pas un vrai ordinateur : il sert seulement à voir comment fonctionne l'application.</p>
+<h2 id="fr-server">3. Comment avoir votre propre serveur (pas à pas)</h2>
+<p>Après l'essai, ou si vous préférez ne pas utiliser le serveur IDQ, il vous faut <b>votre propre serveur</b>. C'est gratuit et simple : il suffit d'un ordinateur toujours allumé et d'environ 20 minutes.</p>
+<h3>Étape 1 - Ce qu'il faut</h3>
+<ul>
+<li>Un <b>ordinateur toujours allumé sous Linux</b> (Ubuntu, Debian, Raspberry Pi OS…) : par exemple un Raspberry Pi 4, un mini PC ou un vieil ordinateur portable. Il consomme très peu.</li>
+<li>Une connexion internet. Inutile d'ouvrir des ports sur la box.</li>
+<li><b>Python 3</b> (déjà présent sur la plupart des Linux) <i>ou</i> Docker.</li>
+</ul>
+<div class="nota">Le serveur lit l'ordinateur sur lequel il tourne (processeur, mémoire, disques…). Windows et Mac peuvent être <i>surveillés</i> avec l'agent, mais le serveur doit tourner sous Linux.</div>
+<h3>Étape 2 - Télécharger le paquet du serveur</h3>
+<p>Sur le site d'IDQ Monitor User, téléchargez <b>idq-monitor-server.zip</b> (section <i>Téléchargements → Serveur</i>). Sur l'ordinateur du serveur :</p>
+<pre><code>unzip idq-monitor-server.zip
+cd idq-monitor-server</code></pre>
+<h3>Étape 3 - Démarrer le serveur</h3>
+<p><b>Méthode A - sans Docker (la plus simple) :</b></p>
+<pre><code>python3 idq_monitor_server.py</code></pre>
+<p>Pour qu'il démarre tout seul à chaque allumage, créez un service :</p>
+<pre><code>sudo tee /etc/systemd/system/idq-monitor-server.service &lt;&lt;EOF
+[Unit]
+Description=IDQ Monitor server
+After=network-online.target
+
+[Service]
+WorkingDirectory=$PWD
+ExecStart=/usr/bin/python3 $PWD/idq_monitor_server.py
+User=$USER
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+sudo systemctl daemon-reload
+sudo systemctl enable --now idq-monitor-server</code></pre>
+<p><b>Méthode B - avec Docker :</b></p>
+<pre><code>docker compose up -d</code></pre>
+<p>Au premier démarrage, le serveur crée la clé d'accès (le <i>jeton</i>) dans le dossier <code>dati</code>. Pour la lire :</p>
+<pre><code>cat dati/monitor.token</code></pre>
+<h3>Étape 4 - Joindre le serveur depuis internet (gratuit)</h3>
+<p>Les applications utilisent une adresse sécurisée (<code>https://…</code>). Choisissez <b>une</b> de ces solutions gratuites :</p>
+<ul>
+<li><b>Tailscale Funnel</b> (la plus simple, sans nom de domaine) : créez un compte gratuit sur tailscale.com, installez Tailscale sur le serveur, activez Funnel dans les paramètres de votre compte et lancez :
+<pre><code>sudo tailscale funnel --bg 8002</code></pre>
+Vous obtenez une adresse stable du type <code>https://nom-pc.votrereseau.ts.net</code>.</li>
+<li><b>Cloudflare Tunnel</b> (si vous avez un domaine chez Cloudflare) : dans <i>Zero Trust → Networks → Tunnels</i>, créez un tunnel, installez le connecteur sur le serveur avec la commande indiquée, puis ajoutez un <i>Public hostname</i> (par exemple <code>monitor.votredomaine.fr</code>) qui pointe vers <code>http://localhost:8002</code>.</li>
+</ul>
+<h3>Étape 5 - Votre lien</h3>
+<p>Le lien à utiliser dans les applications est l'adresse de l'étape 4 suivie de <code>/monitor?k=</code> et du jeton :</p>
+<pre><code>https://YOUR-ADDRESS/monitor?k=YOUR-TOKEN</code></pre>
+<div class="att">Le lien contient la clé d'accès : <b>ne le partagez pas</b>. Quiconque l'a peut voir vos données.</div>
+<h3>Étape 6 - Connecter l'application</h3>
+<p>Dans l'application, ouvrez le menu (trois traits) → <b>Changer le lien</b> et collez le lien. Si l'application affiche l'écran « essai terminé », choisissez <i>J'ai déjà mon serveur</i>.</p>
+<h3>Étape 7 - Ajouter vos ordinateurs</h3>
+<p>Dans l'application : menu → <b>Ajouter un appareil…</b>, saisissez un nom et copiez la commande. Sur l'ordinateur à surveiller, collez-la :</p>
+<ul>
+<li><b>Linux, Raspberry, Mac</b> : dans le Terminal (commande <code>curl … | bash</code>).</li>
+<li><b>Windows</b> : dans PowerShell (commande <code>irm … | iex</code>).</li>
+</ul>
+<p>Après quelques secondes, l'ordinateur apparaît en haut de l'application. La commande installe l'agent et le lance à chaque démarrage. Vous pouvez aussi utiliser les <b>installateurs</b> du site (Windows, Ubuntu, Raspberry, Mac).</p>
+<h3>Étape 8 - Personnaliser</h3>
+<p>Dans le menu, choisissez les <b>sections</b> à voir, les <b>services</b> à surveiller et les <b>alarmes</b> à recevoir (avec les seuils). Facultatif : activez le <b>redémarrage à distance</b> avec un code PIN.</p>
+<h2 id="fr-uso">4. Comment l&#x27;utiliser</h2>
+<ul>
+<li><b>Onglets en haut</b> : un par ordinateur. Le nom est <b>vert</b> s'il est allumé et <b>rouge</b> s'il est éteint ou injoignable ; en dessous s'affiche « actif » ou « éteint ».</li>
+<li><b>Une seule page</b> : activité, processeur avec chaque cœur, mémoire, disques, réseau, températures, services. Les éléments s'adaptent à l'écran ou à la fenêtre.</li>
+<li><b>Menu</b> : sections à afficher, alarmes et alertes, services à afficher, ajouter un appareil, code PIN du redémarrage, guide, à propos, changer le lien.</li>
+<li><b>Widget</b> (Android) : appui long sur l'écran d'accueil, puis <i>IDQ Monitor</i>.</li>
+</ul>
+<h3>Alertes</h3>
+<p>Sur l'application Android, la surveillance en arrière-plan (environ toutes les 30 secondes) envoie une notification en cas d'alarme : processeur, charge, mémoire, swap, disque ou température au-dessus du seuil choisi, service arrêté de façon anormale, ordinateur éteint brutalement ou serveur injoignable. Un <b>arrêt normal</b> d'un ordinateur ne génère pas d'alerte. Sur Android, dans le menu, autorisez <i>sans limites de batterie</i> pour que la surveillance ne soit pas arrêtée.</p>
+<p>Sur iPhone et iPad, c'est le système qui décide à quelle fréquence l'application peut vérifier (en général toutes les 15 à 60 minutes). Sur les applications pour ordinateur, les alarmes ne s'affichent que dans l'application, sans fenêtre contextuelle.</p>
+<h3>Services : actif, arrêté, en échec</h3>
+<p>L'agent distingue un service <b>arrêté</b> (éteint normalement : pas d'alerte) d'un service <b>en échec</b> de façon anormale (erreur, plantage, mémoire épuisée : alerte).</p>
+<h3>Mises à jour et redémarrages</h3>
+<p>S'il y a des mises à jour nécessitant un redémarrage, l'application vous le signale et, si vous avez activé le redémarrage à distance, <b>Redémarrer maintenant…</b> apparaît (le code PIN est demandé). Les mises à jour automatiques des ordinateurs Linux peuvent être programmées la nuit (02h00-02h45) avec redémarrage à 02h30.</p>
+<h3>Le code PIN du redémarrage</h3>
+<p>Au premier lancement, l'application demande si vous voulez pouvoir redémarrer vos ordinateurs depuis l'application. Si vous acceptez, choisissez un code PIN de 4 à 8 chiffres ; depuis le menu, vous pouvez le modifier, le réinitialiser ou le désactiver (<b>à vos risques et périls</b> : sans PIN, personne ne peut redémarrer les ordinateurs à distance). Après 5 codes PIN erronés, un blocage de 5 minutes s'applique. Le code PIN est vérifié par votre serveur : il n'est pas dans l'application.</p>
+<h3>Maintenance déclarée</h3>
+<p>Pour signaler à l'application que vous travaillez sur un ordinateur Linux ou Mac, écrivez une phrase dans le fichier <code>~/.config/idq-monitor-manutenzione</code> : elle apparaîtra dans la fiche <i>Activité</i>. Supprimez le fichier à la fin des travaux.</p>
+<h2 id="fr-agente">5. Les agents en détail</h2>
+<p>Le fichier de configuration de l'agent est <code>~/.config/idq-monitor-agente.json</code> (Windows : <code>%APPDATA%\idq-monitor-agente.json</code>). Vous pouvez indiquer les services à afficher par défaut :</p>
+<pre><code>{
+  &quot;link&quot;: &quot;https://YOUR-ADDRESS/monitor?k=YOUR-TOKEN&quot;,
+  &quot;nome&quot;: &quot;raspberry&quot;,
+  &quot;docker_tutti&quot;: true,
+  &quot;servizi&quot;: {
+    &quot;Web&quot;:    { &quot;porta&quot;: 80,   &quot;systemd&quot;: &quot;nginx&quot; },
+    &quot;Cloud&quot;:  { &quot;porta&quot;: 8080, &quot;docker&quot;: &quot;nextcloud&quot; },
+    &quot;Backup&quot;: 5000
+  }
+}</code></pre>
+<ul>
+<li><code>porta</code> : port local qui doit répondre ; <code>systemd</code> : nom du service (Linux) ; <code>docker</code> : nom du conteneur ; <code>docker_tutti</code> : afficher tous les conteneurs.</li>
+<li>Un service qui vient de démarrer bénéficie de 5 minutes de tolérance avant d'être considéré comme anormal.</li>
+</ul>
+<p>Pour retirer un ordinateur : arrêtez l'agent (Linux : <code>systemctl --user disable --now idq-monitor-agente</code> ; Windows : <code>Unregister-ScheduledTask -TaskName IDQMonitorAgente -Confirm:$false</code> ; Mac : <code>launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/it.idq.monitor-agente.plist</code>).</p>
+<h2 id="fr-problemi">6. Si quelque chose ne fonctionne pas</h2>
+<table>
+<tr><th>Problème</th><th>Que faire</th></tr>
+<tr><td>L'application affiche « Connexion au serveur… »</td><td>Vérifiez le réseau du téléphone, que le serveur est allumé et que le lien est correct (menu → Changer le lien).</td></tr>
+<tr><td>L'ordinateur n'apparaît pas</td><td>Vérifiez que l'agent est actif et relancez la commande <i>Ajouter un appareil</i>. Sous Linux : <code>journalctl --user -u idq-monitor-agente -n 20</code>.</td></tr>
+<tr><td>Erreur 403</td><td>Le lien ou le jeton est incorrect : copiez-le de nouveau depuis le serveur (<code>cat dati/monitor.token</code>).</td></tr>
+<tr><td>Les notifications n'arrivent pas</td><td>Sur Android, autorisez les notifications et l'usage sans limites de batterie ; sur Samsung, retirez l'application des « applications en veille ».</td></tr>
+<tr><td>Code PIN oublié</td><td>Sur le serveur, supprimez <code>dati/monitor.pin</code> et redémarrez le serveur : l'application vous demandera d'en choisir un nouveau.</td></tr>
+<tr><td>Essai terminé</td><td>Suivez les étapes « Comment avoir votre propre serveur » et choisissez <i>J'ai déjà mon serveur</i>.</td></tr>
+</table>
+<h2 id="fr-privacy">7. Confidentialité et contacts</h2>
+<p>L'application n'a ni compte, ni publicité et n'utilise aucun outil d'analyse. Avec votre propre serveur, les données de vos ordinateurs restent entre vos ordinateurs, votre serveur et vos applications. Pendant l'essai de 24 heures, les données vont sur le serveur IDQ et sont supprimées à l'expiration. Tous les détails figurent dans la <a href="privacy.html">politique de confidentialité</a>.</p>
+<p>Développeur : IDQ Developer · <a href="mailto:info.idq.26@gmail.com">info.idq.26@gmail.com</a></p>
+</div>
+<div class="l" data-l="de"><h1>IDQ Monitor User - Komplette Anleitung</h1><p class="sub">So funktioniert es, wie du es testest und wie du deinen eigenen Server bekommst – Schritt für Schritt.</p><nav><b>Inhalt</b><ol><li><a href="#de-cos">Was IDQ Monitor User ist</a></li><li><a href="#de-prova">Der kostenlose 24-Stunden-Test</a></li><li><a href="#de-server">So bekommst du deinen eigenen Server (Schritt für Schritt)</a></li><li><a href="#de-uso">So wird es benutzt</a></li><li><a href="#de-agente">Die Agenten im Detail</a></li><li><a href="#de-problemi">Wenn etwas nicht funktioniert</a></li><li><a href="#de-privacy">Datenschutz und Kontakt</a></li></ol></nav><h2 id="de-cos">1. Was IDQ Monitor User ist</h2>
+<p>IDQ Monitor User zeigt dir in Echtzeit den Zustand deiner Computer: Prozessor (jeder einzelne Kern), Last, Arbeitsspeicher, Swap, Datenträger und Partitionen, Netzwerk, Temperaturen, laufende Dienste, Updates und Wartung. Wenn etwas nicht stimmt, warnt es dich auf dem Handy.</p>
+<p>Es besteht aus drei Teilen:</p>
+<ul>
+<li><b>Die App</b> (Android, iPhone und iPad, Windows, Mac, Linux und eine Webseite), die die Daten anzeigt.</li>
+<li><b>Ein Server</b>: ein ständig laufender Computer, der die Daten sammelt und der App zur Verfügung stellt – auch unterwegs.</li>
+<li><b>Ein Agent</b> auf jedem zu überwachenden Computer: ein kleines Programm, das die Daten an den Server sendet.</li>
+</ul>
+<pre class="sch">  Deine Computer ──(Agent)──►  DEIN SERVER  ◄──  App (Handy, Tablet, PC, Web)</pre>
+<h2 id="de-prova">2. Der kostenlose 24-Stunden-Test</h2>
+<p>Beim ersten Öffnen bietet dir die App einen <b>kostenlosen 24-Stunden-Test</b> auf dem IDQ-Server an, ohne Registrierung:</p>
+<ul>
+<li>du siehst sofort einen <b>Demo-PC</b> mit Beispieldaten;</li>
+<li>wenn du möchtest, kannst du auch <b>deine eigenen PCs</b> verbinden (Menü → <i>Gerät hinzufügen</i>) und sie während des gesamten Tests sehen;</li>
+<li>der Test dauert <b>24 Stunden ab dem ersten Start</b> und ist <b>nur einmal pro Gerät</b> möglich (eine Neuinstallation startet ihn nicht neu);</li>
+<li>nach 24 Stunden stoppt die App und verlangt <b>deinen eigenen Server</b>: unten steht, wie du ihn bekommst. Der Testbereich wird danach gelöscht.</li>
+</ul>
+<p>Während des Tests ist der Fernneustart von PCs nicht verfügbar. Der Demo-PC ist kein echter Computer: Er zeigt nur, wie die App funktioniert.</p>
+<h2 id="de-server">3. So bekommst du deinen eigenen Server (Schritt für Schritt)</h2>
+<p>Nach dem Test, oder wenn du den IDQ-Server nicht nutzen möchtest, brauchst du <b>deinen eigenen Server</b>. Das ist kostenlos und einfach: Du brauchst nur einen ständig laufenden Computer und etwa 20 Minuten.</p>
+<h3>Schritt 1 - Was du brauchst</h3>
+<ul>
+<li>Einen <b>ständig laufenden Computer mit Linux</b> (Ubuntu, Debian, Raspberry Pi OS …): zum Beispiel einen Raspberry Pi 4, einen Mini-PC oder einen alten Laptop. Er verbraucht sehr wenig Strom.</li>
+<li>Eine Internetverbindung. Du musst keine Ports am Router öffnen.</li>
+<li><b>Python 3</b> (auf den meisten Linux-Systemen vorhanden) <i>oder</i> Docker.</li>
+</ul>
+<div class="nota">Der Server liest den Computer aus, auf dem er läuft (Prozessor, Speicher, Datenträger …). Windows und Mac können mit dem Agenten <i>überwacht</i> werden, der Server selbst sollte aber auf Linux laufen.</div>
+<h3>Schritt 2 - Server-Paket herunterladen</h3>
+<p>Lade von der Website von IDQ Monitor User <b>idq-monitor-server.zip</b> herunter (Bereich <i>Download → Server</i>). Auf dem Server-Computer:</p>
+<pre><code>unzip idq-monitor-server.zip
+cd idq-monitor-server</code></pre>
+<h3>Schritt 3 - Server starten</h3>
+<p><b>Methode A - ohne Docker (am einfachsten):</b></p>
+<pre><code>python3 idq_monitor_server.py</code></pre>
+<p>Damit er bei jedem Einschalten von selbst startet, lege einen Dienst an:</p>
+<pre><code>sudo tee /etc/systemd/system/idq-monitor-server.service &lt;&lt;EOF
+[Unit]
+Description=IDQ Monitor server
+After=network-online.target
+
+[Service]
+WorkingDirectory=$PWD
+ExecStart=/usr/bin/python3 $PWD/idq_monitor_server.py
+User=$USER
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+sudo systemctl daemon-reload
+sudo systemctl enable --now idq-monitor-server</code></pre>
+<p><b>Methode B - mit Docker:</b></p>
+<pre><code>docker compose up -d</code></pre>
+<p>Beim ersten Start erstellt der Server den Zugangsschlüssel (das <i>Token</i>) im Ordner <code>dati</code>. So liest du ihn aus:</p>
+<pre><code>cat dati/monitor.token</code></pre>
+<h3>Schritt 4 - Server aus dem Internet erreichbar machen (kostenlos)</h3>
+<p>Die Apps verwenden eine sichere Adresse (<code>https://…</code>). Wähle <b>eine</b> dieser kostenlosen Möglichkeiten:</p>
+<ul>
+<li><b>Tailscale Funnel</b> (am einfachsten, keine Domain nötig): Erstelle ein kostenloses Konto auf tailscale.com, installiere Tailscale auf dem Server, aktiviere Funnel in den Kontoeinstellungen und starte:
+<pre><code>sudo tailscale funnel --bg 8002</code></pre>
+Du erhältst eine stabile Adresse wie <code>https://pc-name.deinnetz.ts.net</code>.</li>
+<li><b>Cloudflare Tunnel</b> (wenn du eine eigene Domain bei Cloudflare hast): Erstelle unter <i>Zero Trust → Networks → Tunnels</i> einen Tunnel, installiere den Connector mit dem angezeigten Befehl auf dem Server und füge dann einen <i>Public hostname</i> hinzu (z. B. <code>monitor.deinedomain.de</code>), der auf <code>http://localhost:8002</code> zeigt.</li>
+</ul>
+<h3>Schritt 5 - Dein Link</h3>
+<p>Der Link für die Apps ist die Adresse aus Schritt 4, gefolgt von <code>/monitor?k=</code> und dem Token:</p>
+<pre><code>https://YOUR-ADDRESS/monitor?k=YOUR-TOKEN</code></pre>
+<div class="att">Der Link enthält den Zugangsschlüssel: <b>gib ihn nicht weiter</b>. Wer ihn hat, kann deine Daten sehen.</div>
+<h3>Schritt 6 - App verbinden</h3>
+<p>Öffne in der App das Menü (drei Striche) → <b>Link ändern</b> und füge den Link ein. Wenn die App den Bildschirm „Test beendet“ zeigt, wähle <i>Ich habe schon meinen Server</i>.</p>
+<h3>Schritt 7 - Deine Computer hinzufügen</h3>
+<p>In der App: Menü → <b>Gerät hinzufügen…</b>, einen Namen eingeben und den Befehl kopieren. Füge ihn auf dem zu überwachenden Computer ein:</p>
+<ul>
+<li><b>Linux, Raspberry, Mac</b>: im Terminal (der Befehl <code>curl … | bash</code>).</li>
+<li><b>Windows</b>: in PowerShell (der Befehl <code>irm … | iex</code>).</li>
+</ul>
+<p>Nach wenigen Sekunden erscheint der Computer oben in der App. Der Befehl installiert den Agenten und startet ihn bei jedem Einschalten. Alternativ nutze die <b>Installer</b> auf der Website (Windows, Ubuntu, Raspberry, Mac).</p>
+<h3>Schritt 8 - Anpassen</h3>
+<p>Wähle im Menü, welche <b>Bereiche</b> du sehen möchtest, welche <b>Dienste</b> überwacht werden und welche <b>Alarme</b> du erhältst (mit Schwellenwerten). Optional: Aktiviere den <b>Fernneustart</b> mit einer PIN.</p>
+<h2 id="de-uso">4. So wird es benutzt</h2>
+<ul>
+<li><b>Reiter oben</b>: einer pro Computer. Der Name ist <b>grün</b>, wenn er an ist, und <b>rot</b>, wenn er aus oder nicht erreichbar ist; darunter steht „aktiv“ oder „aus“.</li>
+<li><b>Eine einzige Seite</b>: Aktivität, Prozessor mit jedem Kern, Speicher, Datenträger, Netzwerk, Temperaturen, Dienste. Die Elemente passen sich Bildschirm oder Fenster an.</li>
+<li><b>Menü</b>: anzuzeigende Bereiche, Alarme und Warnungen, anzuzeigende Dienste, Gerät hinzufügen, Neustart-PIN, Anleitung, Info, Link ändern.</li>
+<li><b>Widget</b> (Android): Startbildschirm lange drücken und <i>IDQ Monitor</i> wählen.</li>
+</ul>
+<h3>Warnungen</h3>
+<p>In der Android-App sendet die Hintergrundprüfung (etwa alle 30 Sekunden) eine Benachrichtigung bei einem Alarm: Prozessor, Last, Speicher, Swap, Datenträger oder Temperatur über deinem Schwellenwert, abnormal beendeter Dienst, plötzlich ausgeschalteter Computer oder nicht erreichbarer Server. Ein <b>normales Herunterfahren</b> eines Computers löst keine Warnung aus. Erlaube unter Android im Menü <i>ohne Akkubeschränkung</i>, damit die Prüfung nicht gestoppt wird.</p>
+<p>Auf iPhone und iPad entscheidet das System, wie oft die App prüfen darf (meist alle 15–60 Minuten). In den Computer-Apps werden Alarme nur in der App angezeigt, ohne Popups.</p>
+<h3>Dienste: aktiv, gestoppt, abgestürzt</h3>
+<p>Der Agent unterscheidet einen <b>gestoppten</b> Dienst (normal ausgeschaltet: keine Warnung) von einem <b>abgestürzten</b> (Fehler, Absturz, Speicher erschöpft: Warnung).</p>
+<h3>Updates und Neustarts</h3>
+<p>Wenn Updates einen Neustart erfordern, meldet dir die App das, und wenn du den Fernneustart aktiviert hast, erscheint <b>Jetzt neu starten…</b> (die PIN ist nötig). Automatische Updates auf Linux-Computern können nachts geplant werden (02:00–02:45) mit Neustart um 02:30.</p>
+<h3>Die Neustart-PIN</h3>
+<p>Beim ersten Start fragt die App, ob du deine Computer über die App neu starten können möchtest. Wenn du zustimmst, wähle eine PIN mit 4–8 Ziffern; im Menü kannst du sie ändern, zurücksetzen oder deaktivieren (<b>auf eigenes Risiko</b>: ohne PIN kann niemand Computer aus der Ferne neu starten). Nach 5 falschen PINs gilt eine Sperre von 5 Minuten. Die PIN prüft dein Server: Sie steckt nicht in der App.</p>
+<h3>Angekündigte Wartung</h3>
+<p>Um der App mitzuteilen, dass du an einem Linux- oder Mac-Computer arbeitest, schreibe einen Satz in die Datei <code>~/.config/idq-monitor-manutenzione</code>: Er erscheint in der Karte <i>Aktivität</i>. Lösche die Datei nach den Arbeiten.</p>
+<h2 id="de-agente">5. Die Agenten im Detail</h2>
+<p>Die Konfigurationsdatei des Agenten ist <code>~/.config/idq-monitor-agente.json</code> (Windows: <code>%APPDATA%\idq-monitor-agente.json</code>). Du kannst die standardmäßig angezeigten Dienste angeben:</p>
+<pre><code>{
+  &quot;link&quot;: &quot;https://YOUR-ADDRESS/monitor?k=YOUR-TOKEN&quot;,
+  &quot;nome&quot;: &quot;raspberry&quot;,
+  &quot;docker_tutti&quot;: true,
+  &quot;servizi&quot;: {
+    &quot;Web&quot;:    { &quot;porta&quot;: 80,   &quot;systemd&quot;: &quot;nginx&quot; },
+    &quot;Cloud&quot;:  { &quot;porta&quot;: 8080, &quot;docker&quot;: &quot;nextcloud&quot; },
+    &quot;Backup&quot;: 5000
+  }
+}</code></pre>
+<ul>
+<li><code>porta</code>: lokaler Port, der antworten muss; <code>systemd</code>: Dienstname (Linux); <code>docker</code>: Containername; <code>docker_tutti</code>: alle Container anzeigen.</li>
+<li>Ein gerade gestarteter Dienst hat 5 Minuten Toleranz, bevor er als abnormal gilt.</li>
+</ul>
+<p>Um einen Computer zu entfernen: Agent stoppen (Linux: <code>systemctl --user disable --now idq-monitor-agente</code>; Windows: <code>Unregister-ScheduledTask -TaskName IDQMonitorAgente -Confirm:$false</code>; Mac: <code>launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/it.idq.monitor-agente.plist</code>).</p>
+<h2 id="de-problemi">6. Wenn etwas nicht funktioniert</h2>
+<table>
+<tr><th>Problem</th><th>Was tun</th></tr>
+<tr><td>Die App zeigt „Verbindung zum Server…“</td><td>Prüfe das Netzwerk des Handys, ob der Server läuft und ob der Link stimmt (Menü → Link ändern).</td></tr>
+<tr><td>Der Computer erscheint nicht</td><td>Prüfe, ob der Agent läuft, und führe den Befehl von <i>Gerät hinzufügen</i> erneut aus. Unter Linux: <code>journalctl --user -u idq-monitor-agente -n 20</code>.</td></tr>
+<tr><td>Fehler 403</td><td>Link oder Token ist falsch: Kopiere ihn erneut vom Server (<code>cat dati/monitor.token</code>).</td></tr>
+<tr><td>Benachrichtigungen kommen nicht an</td><td>Erlaube unter Android Benachrichtigungen und die Nutzung ohne Akkubeschränkung; entferne die App bei Samsung aus den „schlafenden Apps“.</td></tr>
+<tr><td>PIN vergessen</td><td>Lösche auf dem Server <code>dati/monitor.pin</code> und starte den Server neu: Die App fordert dich auf, eine neue zu wählen.</td></tr>
+<tr><td>Test beendet</td><td>Folge den Schritten „So bekommst du deinen eigenen Server“ und wähle <i>Ich habe schon meinen Server</i>.</td></tr>
+</table>
+<h2 id="de-privacy">7. Datenschutz und Kontakt</h2>
+<p>Die App hat keine Konten, keine Werbung und nutzt keine Analyse-Tools. Mit deinem eigenen Server bleiben die Daten deiner Computer zwischen deinen Computern, deinem Server und deinen Apps. Während des 24-Stunden-Tests gehen die Daten an den IDQ-Server und werden nach Ablauf gelöscht. Alle Einzelheiten stehen in der <a href="privacy.html">Datenschutzerklärung</a>.</p>
+<p>Entwickler: IDQ Developer · <a href="mailto:info.idq.26@gmail.com">info.idq.26@gmail.com</a></p>
+</div>
+<div class="l" data-l="es"><h1>IDQ Monitor User - Guía completa</h1><p class="sub">Cómo funciona, cómo probarlo y cómo tener tu propio servidor, paso a paso.</p><nav><b>Índice</b><ol><li><a href="#es-cos">Qué es IDQ Monitor User</a></li><li><a href="#es-prova">La prueba gratuita de 24 horas</a></li><li><a href="#es-server">Cómo tener tu propio servidor (paso a paso)</a></li><li><a href="#es-uso">Cómo se usa</a></li><li><a href="#es-agente">Los agentes en detalle</a></li><li><a href="#es-problemi">Si algo no funciona</a></li><li><a href="#es-privacy">Privacidad y contacto</a></li></ol></nav><h2 id="es-cos">1. Qué es IDQ Monitor User</h2>
+<p>IDQ Monitor User muestra en tiempo real el estado de tus ordenadores: procesador (cada núcleo), carga, memoria, swap, discos y particiones, red, temperaturas, servicios activos, actualizaciones y mantenimiento. Si algo va mal, te avisa en el móvil.</p>
+<p>Funciona con tres piezas:</p>
+<ul>
+<li><b>La app</b> (Android, iPhone y iPad, Windows, Mac, Linux y una página web) que muestra los datos.</li>
+<li><b>Un servidor</b>: un ordenador siempre encendido que recoge los datos y los pone a disposición de la app, incluso fuera de casa.</li>
+<li><b>Un agente</b> en cada ordenador que quieras controlar: un pequeño programa que envía los datos al servidor.</li>
+</ul>
+<pre class="sch">  Tus ordenadores ──(agente)──►  TU SERVIDOR  ◄──  App (móvil, tableta, PC, web)</pre>
+<h2 id="es-prova">2. La prueba gratuita de 24 horas</h2>
+<p>La primera vez que abres la app te ofrece una <b>prueba gratuita de 24 horas</b> en el servidor IDQ, sin registro:</p>
+<ul>
+<li>ves enseguida un <b>PC de demostración</b> con datos de ejemplo;</li>
+<li>si quieres, también puedes conectar <b>tus propios PC</b> (menú → <i>Añadir dispositivo</i>) y verlos durante toda la prueba;</li>
+<li>la prueba dura <b>24 horas desde el primer inicio</b> y solo se puede hacer <b>una vez por dispositivo</b> (reinstalar la app no la reinicia);</li>
+<li>pasadas las 24 horas la app se detiene y pide <b>tu propio servidor</b>: abajo encontrarás cómo conseguirlo. El espacio de prueba se borra después.</li>
+</ul>
+<p>Durante la prueba no está disponible el reinicio remoto de los PC. El PC de demostración no es un ordenador real: solo sirve para ver cómo funciona la app.</p>
+<h2 id="es-server">3. Cómo tener tu propio servidor (paso a paso)</h2>
+<p>Después de la prueba, o si prefieres no usar el servidor IDQ, necesitas <b>tu propio servidor</b>. Es gratis y sencillo: basta un ordenador siempre encendido y unos 20 minutos.</p>
+<h3>Paso 1 - Qué necesitas</h3>
+<ul>
+<li>Un <b>ordenador siempre encendido con Linux</b> (Ubuntu, Debian, Raspberry Pi OS…): por ejemplo una Raspberry Pi 4, un mini PC o un portátil viejo. Consume muy poco.</li>
+<li>Una conexión a internet. No hace falta abrir puertos en el router.</li>
+<li><b>Python 3</b> (ya presente en la mayoría de los Linux) <i>o</i> Docker.</li>
+</ul>
+<div class="nota">El servidor lee el ordenador en el que funciona (procesador, memoria, discos…). Windows y Mac se pueden <i>controlar</i> con el agente, pero el servidor debe ir en Linux.</div>
+<h3>Paso 2 - Descarga el paquete del servidor</h3>
+<p>Desde el sitio web de IDQ Monitor User descarga <b>idq-monitor-server.zip</b> (sección <i>Descargas → Servidor</i>). En el ordenador del servidor:</p>
+<pre><code>unzip idq-monitor-server.zip
+cd idq-monitor-server</code></pre>
+<h3>Paso 3 - Inicia el servidor</h3>
+<p><b>Método A - sin Docker (el más sencillo):</b></p>
+<pre><code>python3 idq_monitor_server.py</code></pre>
+<p>Para que arranque solo en cada encendido, crea un servicio:</p>
+<pre><code>sudo tee /etc/systemd/system/idq-monitor-server.service &lt;&lt;EOF
+[Unit]
+Description=IDQ Monitor server
+After=network-online.target
+
+[Service]
+WorkingDirectory=$PWD
+ExecStart=/usr/bin/python3 $PWD/idq_monitor_server.py
+User=$USER
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+sudo systemctl daemon-reload
+sudo systemctl enable --now idq-monitor-server</code></pre>
+<p><b>Método B - con Docker:</b></p>
+<pre><code>docker compose up -d</code></pre>
+<p>En el primer arranque el servidor crea la clave de acceso (el <i>token</i>) en la carpeta <code>dati</code>. Para leerla:</p>
+<pre><code>cat dati/monitor.token</code></pre>
+<h3>Paso 4 - Llega al servidor desde internet (gratis)</h3>
+<p>Las apps usan una dirección segura (<code>https://…</code>). Elige <b>una</b> de estas opciones gratuitas:</p>
+<ul>
+<li><b>Tailscale Funnel</b> (la más sencilla, sin dominio): crea una cuenta gratuita en tailscale.com, instala Tailscale en el servidor, activa Funnel en los ajustes de tu cuenta y ejecuta:
+<pre><code>sudo tailscale funnel --bg 8002</code></pre>
+Obtienes una dirección estable del tipo <code>https://nombre-pc.turred.ts.net</code>.</li>
+<li><b>Cloudflare Tunnel</b> (si tienes un dominio en Cloudflare): en <i>Zero Trust → Networks → Tunnels</i> crea un túnel, instala el conector en el servidor con el comando que se muestra y añade un <i>Public hostname</i> (por ejemplo <code>monitor.tudominio.es</code>) que apunte a <code>http://localhost:8002</code>.</li>
+</ul>
+<h3>Paso 5 - Tu enlace</h3>
+<p>El enlace que debes usar en las apps es la dirección del paso 4 seguida de <code>/monitor?k=</code> y del token:</p>
+<pre><code>https://YOUR-ADDRESS/monitor?k=YOUR-TOKEN</code></pre>
+<div class="att">El enlace contiene la clave de acceso: <b>no lo compartas</b>. Quien lo tenga puede ver tus datos.</div>
+<h3>Paso 6 - Conecta la app</h3>
+<p>En la app abre el menú (tres rayas) → <b>Cambiar enlace</b> y pega el enlace. Si la app está en la pantalla de «prueba terminada», elige <i>Ya tengo mi servidor</i>.</p>
+<h3>Paso 7 - Añade tus ordenadores</h3>
+<p>En la app: menú → <b>Añadir dispositivo…</b>, escribe un nombre y copia el comando. En el ordenador que quieres controlar, pégalo:</p>
+<ul>
+<li><b>Linux, Raspberry, Mac</b>: en el Terminal (el comando <code>curl … | bash</code>).</li>
+<li><b>Windows</b>: en PowerShell (el comando <code>irm … | iex</code>).</li>
+</ul>
+<p>En pocos segundos el ordenador aparece arriba en la app. El comando instala el agente y lo inicia en cada encendido. También puedes usar los <b>instaladores</b> del sitio web (Windows, Ubuntu, Raspberry, Mac).</p>
+<h3>Paso 8 - Personaliza</h3>
+<p>Desde el menú elige qué <b>secciones</b> ver, qué <b>servicios</b> controlar y qué <b>alarmas</b> recibir (con sus umbrales). Opcional: activa el <b>reinicio remoto</b> con un PIN.</p>
+<h2 id="es-uso">4. Cómo se usa</h2>
+<ul>
+<li><b>Pestañas arriba</b>: una por ordenador. El nombre es <b>verde</b> si está encendido y <b>rojo</b> si está apagado o inaccesible; debajo pone «activo» o «apagado».</li>
+<li><b>Una sola página</b>: actividad, procesador con cada núcleo, memoria, discos, red, temperaturas, servicios. Los elementos se adaptan a la pantalla o a la ventana.</li>
+<li><b>Menú</b>: secciones a mostrar, alarmas y avisos, servicios a mostrar, añadir dispositivo, PIN del reinicio, guía, información, cambiar enlace.</li>
+<li><b>Widget</b> (Android): mantén pulsada la pantalla de inicio y elige <i>IDQ Monitor</i>.</li>
+</ul>
+<h3>Avisos</h3>
+<p>En la app de Android el control en segundo plano (cada 30 segundos aproximadamente) envía una notificación cuando hay una alarma: procesador, carga, memoria, swap, disco o temperatura por encima del umbral que elegiste, servicio detenido de forma anómala, ordenador apagado de golpe o servidor inaccesible. Un <b>apagado normal</b> de un ordenador no genera avisos. En Android, en el menú, permite <i>sin límites de batería</i> para que el control no se detenga.</p>
+<p>En iPhone y iPad es el sistema quien decide cada cuánto puede comprobar la app (normalmente cada 15-60 minutos). En las apps de ordenador las alarmas solo se ven dentro de la app, sin ventanas emergentes.</p>
+<h3>Servicios: activo, parado, fallido</h3>
+<p>El agente distingue un servicio <b>parado</b> (apagado con normalidad: sin aviso) de uno <b>fallido</b> de forma anómala (error, bloqueo, memoria agotada: aviso).</p>
+<h3>Actualizaciones y reinicios</h3>
+<p>Si hay actualizaciones que requieren reiniciar, la app te lo indica y, si has activado el reinicio remoto, aparece <b>Reiniciar ahora…</b> (hace falta el PIN). Las actualizaciones automáticas de los ordenadores Linux pueden programarse de noche (02:00-02:45) con reinicio a las 02:30.</p>
+<h3>El PIN del reinicio</h3>
+<p>En el primer inicio la app pregunta si quieres poder reiniciar tus ordenadores desde la app. Si aceptas, elige un PIN de 4 a 8 cifras; desde el menú puedes cambiarlo, restablecerlo o desactivarlo (<b>bajo tu propio riesgo</b>: sin PIN nadie puede reiniciar ordenadores a distancia). Tras 5 PIN erróneos hay un bloqueo de 5 minutos. El PIN lo comprueba tu servidor: no está en la app.</p>
+<h3>Mantenimiento declarado</h3>
+<p>Para avisar a la app de que estás trabajando en un ordenador Linux o Mac, escribe una frase en el archivo <code>~/.config/idq-monitor-manutenzione</code>: aparecerá en la tarjeta <i>Actividad</i>. Borra el archivo al terminar.</p>
+<h2 id="es-agente">5. Los agentes en detalle</h2>
+<p>El archivo de configuración del agente es <code>~/.config/idq-monitor-agente.json</code> (Windows: <code>%APPDATA%\idq-monitor-agente.json</code>). Puedes indicar los servicios que se muestran por defecto:</p>
+<pre><code>{
+  &quot;link&quot;: &quot;https://YOUR-ADDRESS/monitor?k=YOUR-TOKEN&quot;,
+  &quot;nome&quot;: &quot;raspberry&quot;,
+  &quot;docker_tutti&quot;: true,
+  &quot;servizi&quot;: {
+    &quot;Web&quot;:    { &quot;porta&quot;: 80,   &quot;systemd&quot;: &quot;nginx&quot; },
+    &quot;Cloud&quot;:  { &quot;porta&quot;: 8080, &quot;docker&quot;: &quot;nextcloud&quot; },
+    &quot;Backup&quot;: 5000
+  }
+}</code></pre>
+<ul>
+<li><code>porta</code>: puerto local que debe responder; <code>systemd</code>: nombre del servicio (Linux); <code>docker</code>: nombre del contenedor; <code>docker_tutti</code>: mostrar todos los contenedores.</li>
+<li>Un servicio recién iniciado tiene 5 minutos de margen antes de considerarse anómalo.</li>
+</ul>
+<p>Para quitar un ordenador: detén el agente (Linux: <code>systemctl --user disable --now idq-monitor-agente</code>; Windows: <code>Unregister-ScheduledTask -TaskName IDQMonitorAgente -Confirm:$false</code>; Mac: <code>launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/it.idq.monitor-agente.plist</code>).</p>
+<h2 id="es-problemi">6. Si algo no funciona</h2>
+<table>
+<tr><th>Problema</th><th>Qué hacer</th></tr>
+<tr><td>La app dice «Conectando con el servidor…»</td><td>Comprueba la red del móvil, que el servidor esté encendido y que el enlace sea correcto (menú → Cambiar enlace).</td></tr>
+<tr><td>El ordenador no aparece</td><td>Comprueba que el agente esté activo y vuelve a ejecutar el comando de <i>Añadir dispositivo</i>. En Linux: <code>journalctl --user -u idq-monitor-agente -n 20</code>.</td></tr>
+<tr><td>Error 403</td><td>El enlace o el token no es correcto: cópialo de nuevo desde el servidor (<code>cat dati/monitor.token</code>).</td></tr>
+<tr><td>No llegan las notificaciones</td><td>En Android permite las notificaciones y el uso sin límites de batería; en Samsung quita la app de las «aplicaciones en suspensión».</td></tr>
+<tr><td>PIN olvidado</td><td>En el servidor borra <code>dati/monitor.pin</code> y reinicia el servidor: la app te pedirá elegir uno nuevo.</td></tr>
+<tr><td>Prueba terminada</td><td>Sigue los pasos de «Cómo tener tu propio servidor» y elige <i>Ya tengo mi servidor</i>.</td></tr>
+</table>
+<h2 id="es-privacy">7. Privacidad y contacto</h2>
+<p>La app no tiene cuentas, ni publicidad y no usa herramientas de análisis. Con tu propio servidor, los datos de tus ordenadores quedan entre tus ordenadores, tu servidor y tus apps. Durante la prueba de 24 horas los datos van al servidor IDQ y se borran al caducar. Todos los detalles están en la <a href="privacy.html">política de privacidad</a>.</p>
+<p>Desarrollador: IDQ Developer · <a href="mailto:info.idq.26@gmail.com">info.idq.26@gmail.com</a></p>
+</div>
+</main>
+<script>
+(function(){var ok=["it","en","fr","de","es"],q=(location.search.match(/[?&]l=([a-z]{2})/)||[])[1],s=null;try{s=localStorage.getItem("l")}catch(e){}
+var l=q||s||(navigator.language||"it").slice(0,2).toLowerCase();if(ok.indexOf(l)<0)l="en";
+function imposta(x){document.documentElement.setAttribute("data-l",x);document.documentElement.lang=x;document.querySelectorAll(".lingue button").forEach(function(b){b.classList.toggle("on",b.dataset.l==x)});try{localStorage.setItem("l",x)}catch(e){}}
+document.querySelectorAll(".lingue button").forEach(function(b){b.onclick=function(){imposta(b.dataset.l)}});imposta(l)})();
+</script>
+</body></html>
