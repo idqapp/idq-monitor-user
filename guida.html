@@ -26,7 +26,7 @@ pre.sch{background:var(--card);color:var(--tx)}
 <p>IDQ Monitor User mostra in tempo reale lo stato dei tuoi computer: processore (con ogni core), carico, memoria, swap, dischi e partizioni, rete, temperature, servizi attivi, aggiornamenti e manutenzione. Se qualcosa non va, ti avvisa sul telefono.</p>
 <p>Funziona con tre pezzi:</p>
 <ul>
-<li><b>L'app</b> (Android, iPhone e iPad, Windows, Mac, Linux e pagina web) che mostra i dati.</li>
+<li><b>L'app</b> (Android, Windows, Linux e pagina web) che mostra i dati.</li>
 <li><b>Un server</b>: un computer sempre acceso che raccoglie i dati e li rende disponibili all'app, anche fuori casa.</li>
 <li><b>Un agente</b> su ogni computer da controllare: un piccolo programma che manda i dati al server.</li>
 </ul>
@@ -48,7 +48,7 @@ pre.sch{background:var(--card);color:var(--tx)}
 <li>Una connessione a internet. Non serve aprire porte sul router.</li>
 <li><b>Python 3</b> (già presente nella maggior parte dei Linux) <i>oppure</i> Docker.</li>
 </ul>
-<div class="nota">Il server legge il computer su cui gira (processore, memoria, dischi…). Windows e Mac possono essere <i>controllati</i> con l'agente, ma il server va su Linux.</div>
+<div class="nota">Il server legge il computer su cui gira (processore, memoria, dischi…). Windows può essere <i>controllato</i> con l'agente, ma il server va su Linux.</div>
 <div class="nota"><b>Raspberry Pi.</b> Come server consigliamo Pi 4 o Pi 5 (almeno 2 GB di memoria; un Pi 3 basta per pochi computer). Come computer da controllare, l'agente funziona su tutti i modelli con Raspberry Pi OS. L'installer <code>.deb</code> e l'app con finestra richiedono un sistema a 64 bit (Pi 5, 4, 400, 3, 3+, Zero 2 W): verifica con <code>uname -m</code> (deve rispondere <code>aarch64</code>); su Pi Zero, Pi 1 e Pi 2 con sistema a 32 bit usa il comando di <i>Aggiungi dispositivo</i>. L'app con finestra serve il desktop grafico (non la versione Lite).</div>
 <h3>Passo 2 - Scarica il pacchetto del server</h3>
 <p>Dal sito di IDQ Monitor User scarica <b>idq-monitor-server.zip</b> (sezione <i>Download → Server</i>). Sul computer del server:</p>
@@ -95,11 +95,11 @@ Ottieni un indirizzo stabile del tipo <code>https://nome-pc.tuarete.ts.net</code
 <h3>Passo 7 - Aggiungi i tuoi computer</h3>
 <p>Nell'app: menu → <b>Aggiungi dispositivo…</b>, scrivi un nome e copia il comando. Sul computer da controllare incollalo:</p>
 <ul>
-<li><b>Linux, Raspberry, Mac</b>: nel Terminale (comando <code>curl … | bash</code>).</li>
+<li><b>Linux, Raspberry</b>: nel Terminale (comando <code>curl … | bash</code>).</li>
 <li><b>Windows</b>: in PowerShell (comando <code>irm … | iex</code>).</li>
 </ul>
 <p><b>Permessi di amministratore:</b> l'installazione li chiede al momento (su Windows compare la finestra di conferma; su Linux e Raspberry viene chiesta la password di <code>sudo</code>). Servono per il riavvio da remoto e per leggere i consumi: viene creata solo una regola limitata, e se rifiuti il monitor funziona lo stesso.</p>
-<p>Dopo pochi secondi il computer compare in alto nell'app. Il comando installa l'agente e lo fa partire a ogni accensione. In alternativa usa gli <b>installer</b> del sito (Windows, Ubuntu, Raspberry, Mac).</p>
+<p>Dopo pochi secondi il computer compare in alto nell'app. Il comando installa l'agente e lo fa partire a ogni accensione. In alternativa usa gli <b>installer</b> del sito (Windows, Ubuntu, Raspberry).</p>
 <h3>Passo 8 - Personalizza</h3>
 <p>Dal menu scegli quali <b>sezioni</b> vedere, quali <b>servizi</b> controllare e quali <b>allarmi</b> ricevere (con le soglie). Facoltativo: attiva il <b>riavvio da remoto</b> con un PIN.</p>
 <h2 id="it-uso">4. Come si usa</h2>
@@ -111,7 +111,7 @@ Ottieni un indirizzo stabile del tipo <code>https://nome-pc.tuarete.ts.net</code
 </ul>
 <h3>Avvisi</h3>
 <p>Sull'app Android il controllo in background (circa ogni 30 secondi) ti manda una notifica quando c'è un allarme: processore, carico, memoria, swap, disco o temperatura oltre la soglia che hai scelto, servizio arrestato in modo anomalo, computer spento all'improvviso o server non raggiungibile. Uno <b>spegnimento normale</b> di un computer non genera avvisi. Su Android, nel menu, consenti <i>senza limiti di batteria</i> per non far fermare il controllo.</p>
-<p>Su iPhone e iPad il sistema decide ogni quanto l'app può controllare (di solito ogni 15-60 minuti). Sulle app per computer gli allarmi si vedono solo dentro l'app, senza popup.</p>
+<p>Sulle app per computer gli allarmi si vedono solo dentro l'app, senza popup.</p>
 <h3>Servizi: attivo, fermo, arrestato</h3>
 <p>L'agente distingue un servizio <b>fermo</b> (spento in modo normale: nessun avviso) da uno <b>arrestato</b> in modo anomalo (errore, crash, memoria esaurita: avviso).</p>
 <h3>Aggiornamenti e riavvii</h3>
@@ -119,7 +119,7 @@ Ottieni un indirizzo stabile del tipo <code>https://nome-pc.tuarete.ts.net</code
 <h3>Il PIN del riavvio</h3>
 <p>Al primo avvio l'app chiede se vuoi poter riavviare i computer dall'app. Se accetti scegli un PIN di 4-8 cifre; dal menu puoi modificarlo, ripristinarlo o disattivarlo (<b>a tuo rischio e pericolo</b>: senza PIN nessuno può riavviare i computer da remoto). Dopo 5 PIN sbagliati c'è un blocco di 5 minuti. Il PIN lo controlla il tuo server: non è nell'app.</p>
 <h3>Manutenzione dichiarata</h3>
-<p>Per avvisare l'app che stai facendo dei lavori su un computer Linux o Mac, scrivi una frase nel file <code>~/.config/idq-monitor-manutenzione</code>: comparirà nella scheda <i>Attività</i>. Cancella il file a fine lavori.</p>
+<p>Per avvisare l'app che stai facendo dei lavori su un computer Linux, scrivi una frase nel file <code>~/.config/idq-monitor-manutenzione</code>: comparirà nella scheda <i>Attività</i>. Cancella il file a fine lavori.</p>
 <h3>GPU e consumi in watt</h3>
 <p>La scheda <b>GPU</b> compare solo se il computer ha una scheda video <b>dedicata</b> (non quella integrata nel processore): mostra utilizzo, memoria video, temperatura e watt (NVIDIA con <code>nvidia-smi</code>; AMD su Linux).</p>
 <p>La sezione <b>Consumo (watt)</b> mostra i <b>watt totali</b> e, separati, quelli di <b>processore</b> e <b>GPU</b>. Senza altro, il totale è una stima (processore + GPU). Il processore si legge dal contatore di energia del sistema (su Linux serve il permesso di amministratore dato in installazione).</p>
@@ -143,7 +143,7 @@ Ottieni un indirizzo stabile del tipo <code>https://nome-pc.tuarete.ts.net</code
 <li><code>porta</code>: porta locale che deve rispondere; <code>systemd</code>: nome del servizio (Linux); <code>docker</code>: nome del contenitore; <code>docker_tutti</code>: mostra tutti i contenitori.</li>
 <li>Un servizio appena avviato ha 5 minuti di tolleranza prima di essere considerato anomalo.</li>
 </ul>
-<p>Per togliere un computer: ferma l'agente (Linux: <code>systemctl --user disable --now idq-monitor-agente</code>; Windows: <code>Unregister-ScheduledTask -TaskName IDQMonitorAgente -Confirm:$false</code>; Mac: <code>launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/it.idq.monitor-agente.plist</code>).</p>
+<p>Per togliere un computer: ferma l'agente (Linux: <code>systemctl --user disable --now idq-monitor-agente</code>; Windows: <code>Unregister-ScheduledTask -TaskName IDQMonitorAgente -Confirm:$false</code>).</p>
 <h2 id="it-problemi">6. Se qualcosa non funziona</h2>
 <table>
 <tr><th>Problema</th><th>Cosa fare</th></tr>
@@ -162,7 +162,7 @@ Ottieni un indirizzo stabile del tipo <code>https://nome-pc.tuarete.ts.net</code
 <p>IDQ Monitor User shows the status of your computers in real time: processor (every single core), load, memory, swap, disks and partitions, network, temperatures, running services, updates and maintenance. If something is wrong, it alerts you on your phone.</p>
 <p>It works with three parts:</p>
 <ul>
-<li><b>The app</b> (Android, iPhone and iPad, Windows, Mac, Linux and a web page) that shows the data.</li>
+<li><b>The app</b> (Android, Windows, Linux and a web page) that shows the data.</li>
 <li><b>A server</b>: an always-on computer that collects the data and makes it available to the app, even when you're away from home.</li>
 <li><b>An agent</b> on every computer you want to monitor: a small program that sends the data to the server.</li>
 </ul>
@@ -184,7 +184,7 @@ Ottieni un indirizzo stabile del tipo <code>https://nome-pc.tuarete.ts.net</code
 <li>An internet connection. You don't need to open any router ports.</li>
 <li><b>Python 3</b> (already present on most Linux systems) <i>or</i> Docker.</li>
 </ul>
-<div class="nota">The server reads the computer it runs on (processor, memory, disks…). Windows and Mac can be <i>monitored</i> with the agent, but the server itself should run on Linux.</div>
+<div class="nota">The server reads the computer it runs on (processor, memory, disks…). Windows can be <i>monitored</i> with the agent, but the server itself should run on Linux.</div>
 <div class="nota"><b>Raspberry Pi.</b> As a server we recommend a Pi 4 or Pi 5 (at least 2 GB of memory; a Pi 3 is enough for a few computers). As a computer to monitor, the agent works on all models running Raspberry Pi OS. The <code>.deb</code> installer and the windowed app need a 64-bit system (Pi 5, 4, 400, 3, 3+, Zero 2 W): check with <code>uname -m</code> (it must answer <code>aarch64</code>); on Pi Zero, Pi 1 and Pi 2 with a 32-bit system use the <i>Add device</i> command. The windowed app needs the graphical desktop (not the Lite version).</div>
 <h3>Step 2 - Download the server package</h3>
 <p>From the IDQ Monitor User website download <b>idq-monitor-server.zip</b> (section <i>Download → Server</i>). On the server computer:</p>
@@ -231,11 +231,11 @@ You get a stable address like <code>https://pc-name.yournet.ts.net</code>.</li>
 <h3>Step 7 - Add your computers</h3>
 <p>In the app: menu → <b>Add device…</b>, type a name and copy the command. On the computer you want to monitor paste it:</p>
 <ul>
-<li><b>Linux, Raspberry, Mac</b>: in the Terminal (the <code>curl … | bash</code> command).</li>
+<li><b>Linux, Raspberry</b>: in the Terminal (the <code>curl … | bash</code> command).</li>
 <li><b>Windows</b>: in PowerShell (the <code>irm … | iex</code> command).</li>
 </ul>
 <p><b>Administrator permission:</b> the installation asks for it at that moment (on Windows the confirmation window appears; on Linux and Raspberry the <code>sudo</code> password is requested). It is needed for remote restart and to read power consumption: only a narrow rule is created, and if you refuse the monitor still works.</p>
-<p>After a few seconds the computer appears at the top of the app. The command installs the agent and starts it at every boot. Alternatively use the <b>installers</b> on the website (Windows, Ubuntu, Raspberry, Mac).</p>
+<p>After a few seconds the computer appears at the top of the app. The command installs the agent and starts it at every boot. Alternatively use the <b>installers</b> on the website (Windows, Ubuntu, Raspberry).</p>
 <h3>Step 8 - Customise</h3>
 <p>From the menu choose which <b>sections</b> to see, which <b>services</b> to monitor and which <b>alarms</b> to receive (with thresholds). Optional: turn on <b>remote restart</b> with a PIN.</p>
 <h2 id="en-uso">4. How to use it</h2>
@@ -247,7 +247,7 @@ You get a stable address like <code>https://pc-name.yournet.ts.net</code>.</li>
 </ul>
 <h3>Alerts</h3>
 <p>On the Android app the background check (about every 30 seconds) sends a notification when there is an alarm: processor, load, memory, swap, disk or temperature above the threshold you chose, a service stopped abnormally, a computer suddenly off, or the server unreachable. A <b>normal shutdown</b> of a computer does not trigger alerts. On Android, in the menu, allow <i>without battery limits</i> so the check is not stopped.</p>
-<p>On iPhone and iPad the system decides how often the app can check (usually every 15-60 minutes). On the computer apps, alarms are shown only inside the app, with no popups.</p>
+<p>On the computer apps, alarms are shown only inside the app, with no popups.</p>
 <h3>Services: active, stopped, failed</h3>
 <p>The agent tells a <b>stopped</b> service (turned off normally: no alert) from one that <b>failed</b> abnormally (error, crash, out of memory: alert).</p>
 <h3>Updates and restarts</h3>
@@ -255,7 +255,7 @@ You get a stable address like <code>https://pc-name.yournet.ts.net</code>.</li>
 <h3>The restart PIN</h3>
 <p>On first launch the app asks whether you want to be able to restart your computers from the app. If you accept, choose a PIN of 4-8 digits; from the menu you can change, reset or turn it off (<b>at your own risk</b>: without a PIN nobody can restart computers remotely). After 5 wrong PINs there is a 5-minute lock. The PIN is checked by your server: it is not in the app.</p>
 <h3>Declared maintenance</h3>
-<p>To tell the app you are working on a Linux or Mac computer, write a sentence in the file <code>~/.config/idq-monitor-manutenzione</code>: it will appear in the <i>Activity</i> card. Delete the file when you're done.</p>
+<p>To tell the app you are working on a Linux computer, write a sentence in the file <code>~/.config/idq-monitor-manutenzione</code>: it will appear in the <i>Activity</i> card. Delete the file when you're done.</p>
 <h3>GPU and power consumption in watts</h3>
 <p>The <b>GPU</b> card appears only if the computer has a <b>dedicated</b> graphics card (not the one built into the processor): it shows usage, video memory, temperature and watts (NVIDIA with <code>nvidia-smi</code>; AMD on Linux).</p>
 <p>The <b>Power (watts)</b> section shows the <b>total watts</b> and, separately, those of the <b>processor</b> and the <b>GPU</b>. By default the total is an estimate (processor + GPU). The processor is read from the system energy counter (on Linux this needs the administrator permission given at installation).</p>
@@ -279,7 +279,7 @@ You get a stable address like <code>https://pc-name.yournet.ts.net</code>.</li>
 <li><code>porta</code>: local port that must respond; <code>systemd</code>: service name (Linux); <code>docker</code>: container name; <code>docker_tutti</code>: show all containers.</li>
 <li>A service that has just started gets 5 minutes of grace before being considered abnormal.</li>
 </ul>
-<p>To remove a computer: stop the agent (Linux: <code>systemctl --user disable --now idq-monitor-agente</code>; Windows: <code>Unregister-ScheduledTask -TaskName IDQMonitorAgente -Confirm:$false</code>; Mac: <code>launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/it.idq.monitor-agente.plist</code>).</p>
+<p>To remove a computer: stop the agent (Linux: <code>systemctl --user disable --now idq-monitor-agente</code>; Windows: <code>Unregister-ScheduledTask -TaskName IDQMonitorAgente -Confirm:$false</code>).</p>
 <h2 id="en-problemi">6. If something doesn&#x27;t work</h2>
 <table>
 <tr><th>Problem</th><th>What to do</th></tr>
@@ -298,7 +298,7 @@ You get a stable address like <code>https://pc-name.yournet.ts.net</code>.</li>
 <p>IDQ Monitor User affiche en temps réel l'état de vos ordinateurs : processeur (chaque cœur), charge, mémoire, swap, disques et partitions, réseau, températures, services actifs, mises à jour et maintenance. En cas de problème, il vous alerte sur votre téléphone.</p>
 <p>Il repose sur trois éléments :</p>
 <ul>
-<li><b>L'application</b> (Android, iPhone et iPad, Windows, Mac, Linux et page web) qui affiche les données.</li>
+<li><b>L'application</b> (Android, Windows, Linux et page web) qui affiche les données.</li>
 <li><b>Un serveur</b> : un ordinateur toujours allumé qui collecte les données et les met à disposition de l'application, même hors de chez vous.</li>
 <li><b>Un agent</b> sur chaque ordinateur à surveiller : un petit programme qui envoie les données au serveur.</li>
 </ul>
@@ -320,7 +320,7 @@ You get a stable address like <code>https://pc-name.yournet.ts.net</code>.</li>
 <li>Une connexion internet. Inutile d'ouvrir des ports sur la box.</li>
 <li><b>Python 3</b> (déjà présent sur la plupart des Linux) <i>ou</i> Docker.</li>
 </ul>
-<div class="nota">Le serveur lit l'ordinateur sur lequel il tourne (processeur, mémoire, disques…). Windows et Mac peuvent être <i>surveillés</i> avec l'agent, mais le serveur doit tourner sous Linux.</div>
+<div class="nota">Le serveur lit l'ordinateur sur lequel il tourne (processeur, mémoire, disques…). Windows peut être <i>surveillé</i> avec l'agent, mais le serveur doit tourner sous Linux.</div>
 <div class="nota"><b>Raspberry Pi.</b> Comme serveur, nous recommandons un Pi 4 ou Pi 5 (au moins 2 Go de mémoire ; un Pi 3 suffit pour quelques ordinateurs). Comme ordinateur à surveiller, l'agent fonctionne sur tous les modèles avec Raspberry Pi OS. L'installateur <code>.deb</code> et l'application à fenêtre nécessitent un système 64 bits (Pi 5, 4, 400, 3, 3+, Zero 2 W) : vérifiez avec <code>uname -m</code> (il doit répondre <code>aarch64</code>) ; sur Pi Zero, Pi 1 et Pi 2 avec un système 32 bits, utilisez la commande <i>Ajouter un appareil</i>. L'application à fenêtre nécessite le bureau graphique (pas la version Lite).</div>
 <h3>Étape 2 - Télécharger le paquet du serveur</h3>
 <p>Sur le site d'IDQ Monitor User, téléchargez <b>idq-monitor-server.zip</b> (section <i>Téléchargements → Serveur</i>). Sur l'ordinateur du serveur :</p>
@@ -367,11 +367,11 @@ Vous obtenez une adresse stable du type <code>https://nom-pc.votrereseau.ts.net<
 <h3>Étape 7 - Ajouter vos ordinateurs</h3>
 <p>Dans l'application : menu → <b>Ajouter un appareil…</b>, saisissez un nom et copiez la commande. Sur l'ordinateur à surveiller, collez-la :</p>
 <ul>
-<li><b>Linux, Raspberry, Mac</b> : dans le Terminal (commande <code>curl … | bash</code>).</li>
+<li><b>Linux, Raspberry</b> : dans le Terminal (commande <code>curl … | bash</code>).</li>
 <li><b>Windows</b> : dans PowerShell (commande <code>irm … | iex</code>).</li>
 </ul>
 <p><b>Droits d'administrateur :</b> l'installation les demande à ce moment-là (sous Windows, la fenêtre de confirmation s'affiche ; sous Linux et Raspberry, le mot de passe <code>sudo</code> est demandé). Ils servent au redémarrage à distance et à la lecture de la consommation : seule une règle limitée est créée, et si vous refusez, le moniteur fonctionne quand même.</p>
-<p>Après quelques secondes, l'ordinateur apparaît en haut de l'application. La commande installe l'agent et le lance à chaque démarrage. Vous pouvez aussi utiliser les <b>installateurs</b> du site (Windows, Ubuntu, Raspberry, Mac).</p>
+<p>Après quelques secondes, l'ordinateur apparaît en haut de l'application. La commande installe l'agent et le lance à chaque démarrage. Vous pouvez aussi utiliser les <b>installateurs</b> du site (Windows, Ubuntu, Raspberry).</p>
 <h3>Étape 8 - Personnaliser</h3>
 <p>Dans le menu, choisissez les <b>sections</b> à voir, les <b>services</b> à surveiller et les <b>alarmes</b> à recevoir (avec les seuils). Facultatif : activez le <b>redémarrage à distance</b> avec un code PIN.</p>
 <h2 id="fr-uso">4. Comment l&#x27;utiliser</h2>
@@ -383,7 +383,7 @@ Vous obtenez une adresse stable du type <code>https://nom-pc.votrereseau.ts.net<
 </ul>
 <h3>Alertes</h3>
 <p>Sur l'application Android, la surveillance en arrière-plan (environ toutes les 30 secondes) envoie une notification en cas d'alarme : processeur, charge, mémoire, swap, disque ou température au-dessus du seuil choisi, service arrêté de façon anormale, ordinateur éteint brutalement ou serveur injoignable. Un <b>arrêt normal</b> d'un ordinateur ne génère pas d'alerte. Sur Android, dans le menu, autorisez <i>sans limites de batterie</i> pour que la surveillance ne soit pas arrêtée.</p>
-<p>Sur iPhone et iPad, c'est le système qui décide à quelle fréquence l'application peut vérifier (en général toutes les 15 à 60 minutes). Sur les applications pour ordinateur, les alarmes ne s'affichent que dans l'application, sans fenêtre contextuelle.</p>
+<p>Sur les applications pour ordinateur, les alarmes ne s'affichent que dans l'application, sans fenêtre contextuelle.</p>
 <h3>Services : actif, arrêté, en échec</h3>
 <p>L'agent distingue un service <b>arrêté</b> (éteint normalement : pas d'alerte) d'un service <b>en échec</b> de façon anormale (erreur, plantage, mémoire épuisée : alerte).</p>
 <h3>Mises à jour et redémarrages</h3>
@@ -391,7 +391,7 @@ Vous obtenez une adresse stable du type <code>https://nom-pc.votrereseau.ts.net<
 <h3>Le code PIN du redémarrage</h3>
 <p>Au premier lancement, l'application demande si vous voulez pouvoir redémarrer vos ordinateurs depuis l'application. Si vous acceptez, choisissez un code PIN de 4 à 8 chiffres ; depuis le menu, vous pouvez le modifier, le réinitialiser ou le désactiver (<b>à vos risques et périls</b> : sans PIN, personne ne peut redémarrer les ordinateurs à distance). Après 5 codes PIN erronés, un blocage de 5 minutes s'applique. Le code PIN est vérifié par votre serveur : il n'est pas dans l'application.</p>
 <h3>Maintenance déclarée</h3>
-<p>Pour signaler à l'application que vous travaillez sur un ordinateur Linux ou Mac, écrivez une phrase dans le fichier <code>~/.config/idq-monitor-manutenzione</code> : elle apparaîtra dans la fiche <i>Activité</i>. Supprimez le fichier à la fin des travaux.</p>
+<p>Pour signaler à l'application que vous travaillez sur un ordinateur Linux, écrivez une phrase dans le fichier <code>~/.config/idq-monitor-manutenzione</code> : elle apparaîtra dans la fiche <i>Activité</i>. Supprimez le fichier à la fin des travaux.</p>
 <h3>GPU et consommation en watts</h3>
 <p>La carte <b>GPU</b> n'apparaît que si l'ordinateur possède une carte graphique <b>dédiée</b> (pas celle intégrée au processeur) : elle affiche l'utilisation, la mémoire vidéo, la température et les watts (NVIDIA avec <code>nvidia-smi</code> ; AMD sous Linux).</p>
 <p>La section <b>Consommation (watts)</b> affiche les <b>watts totaux</b> et, séparément, ceux du <b>processeur</b> et du <b>GPU</b>. Par défaut, le total est une estimation (processeur + GPU). Le processeur est lu depuis le compteur d'énergie du système (sous Linux, cela demande le droit d'administrateur accordé à l'installation).</p>
@@ -415,7 +415,7 @@ Vous obtenez une adresse stable du type <code>https://nom-pc.votrereseau.ts.net<
 <li><code>porta</code> : port local qui doit répondre ; <code>systemd</code> : nom du service (Linux) ; <code>docker</code> : nom du conteneur ; <code>docker_tutti</code> : afficher tous les conteneurs.</li>
 <li>Un service qui vient de démarrer bénéficie de 5 minutes de tolérance avant d'être considéré comme anormal.</li>
 </ul>
-<p>Pour retirer un ordinateur : arrêtez l'agent (Linux : <code>systemctl --user disable --now idq-monitor-agente</code> ; Windows : <code>Unregister-ScheduledTask -TaskName IDQMonitorAgente -Confirm:$false</code> ; Mac : <code>launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/it.idq.monitor-agente.plist</code>).</p>
+<p>Pour retirer un ordinateur : arrêtez l'agent (Linux : <code>systemctl --user disable --now idq-monitor-agente</code> ; Windows : <code>Unregister-ScheduledTask -TaskName IDQMonitorAgente -Confirm:$false</code>).</p>
 <h2 id="fr-problemi">6. Si quelque chose ne fonctionne pas</h2>
 <table>
 <tr><th>Problème</th><th>Que faire</th></tr>
@@ -434,7 +434,7 @@ Vous obtenez une adresse stable du type <code>https://nom-pc.votrereseau.ts.net<
 <p>IDQ Monitor User zeigt dir in Echtzeit den Zustand deiner Computer: Prozessor (jeder einzelne Kern), Last, Arbeitsspeicher, Swap, Datenträger und Partitionen, Netzwerk, Temperaturen, laufende Dienste, Updates und Wartung. Wenn etwas nicht stimmt, warnt es dich auf dem Handy.</p>
 <p>Es besteht aus drei Teilen:</p>
 <ul>
-<li><b>Die App</b> (Android, iPhone und iPad, Windows, Mac, Linux und eine Webseite), die die Daten anzeigt.</li>
+<li><b>Die App</b> (Android, Windows, Linux und eine Webseite), die die Daten anzeigt.</li>
 <li><b>Ein Server</b>: ein ständig laufender Computer, der die Daten sammelt und der App zur Verfügung stellt – auch unterwegs.</li>
 <li><b>Ein Agent</b> auf jedem zu überwachenden Computer: ein kleines Programm, das die Daten an den Server sendet.</li>
 </ul>
@@ -456,7 +456,7 @@ Vous obtenez une adresse stable du type <code>https://nom-pc.votrereseau.ts.net<
 <li>Eine Internetverbindung. Du musst keine Ports am Router öffnen.</li>
 <li><b>Python 3</b> (auf den meisten Linux-Systemen vorhanden) <i>oder</i> Docker.</li>
 </ul>
-<div class="nota">Der Server liest den Computer aus, auf dem er läuft (Prozessor, Speicher, Datenträger …). Windows und Mac können mit dem Agenten <i>überwacht</i> werden, der Server selbst sollte aber auf Linux laufen.</div>
+<div class="nota">Der Server liest den Computer aus, auf dem er läuft (Prozessor, Speicher, Datenträger …). Windows kann mit dem Agenten <i>überwacht</i> werden, der Server selbst sollte aber auf Linux laufen.</div>
 <div class="nota"><b>Raspberry Pi.</b> Als Server empfehlen wir einen Pi 4 oder Pi 5 (mindestens 2 GB Speicher; ein Pi 3 reicht für wenige Computer). Als zu überwachender Computer läuft der Agent auf allen Modellen mit Raspberry Pi OS. Der <code>.deb</code>-Installer und die Fenster-App benötigen ein 64-Bit-System (Pi 5, 4, 400, 3, 3+, Zero 2 W): Prüfe mit <code>uname -m</code> (die Antwort muss <code>aarch64</code> lauten); bei Pi Zero, Pi 1 und Pi 2 mit 32-Bit-System nutze den Befehl von <i>Gerät hinzufügen</i>. Die Fenster-App braucht den grafischen Desktop (nicht die Lite-Version).</div>
 <h3>Schritt 2 - Server-Paket herunterladen</h3>
 <p>Lade von der Website von IDQ Monitor User <b>idq-monitor-server.zip</b> herunter (Bereich <i>Download → Server</i>). Auf dem Server-Computer:</p>
@@ -503,11 +503,11 @@ Du erhältst eine stabile Adresse wie <code>https://pc-name.deinnetz.ts.net</cod
 <h3>Schritt 7 - Deine Computer hinzufügen</h3>
 <p>In der App: Menü → <b>Gerät hinzufügen…</b>, einen Namen eingeben und den Befehl kopieren. Füge ihn auf dem zu überwachenden Computer ein:</p>
 <ul>
-<li><b>Linux, Raspberry, Mac</b>: im Terminal (der Befehl <code>curl … | bash</code>).</li>
+<li><b>Linux, Raspberry</b>: im Terminal (der Befehl <code>curl … | bash</code>).</li>
 <li><b>Windows</b>: in PowerShell (der Befehl <code>irm … | iex</code>).</li>
 </ul>
 <p><b>Administratorrechte:</b> Die Installation fragt sie in diesem Moment ab (unter Windows erscheint das Bestätigungsfenster; unter Linux und Raspberry wird das <code>sudo</code>-Passwort verlangt). Sie werden für den Neustart aus der Ferne und zum Auslesen des Stromverbrauchs gebraucht: Es wird nur eine eng begrenzte Regel angelegt, und bei Ablehnung funktioniert der Monitor trotzdem.</p>
-<p>Nach wenigen Sekunden erscheint der Computer oben in der App. Der Befehl installiert den Agenten und startet ihn bei jedem Einschalten. Alternativ nutze die <b>Installer</b> auf der Website (Windows, Ubuntu, Raspberry, Mac).</p>
+<p>Nach wenigen Sekunden erscheint der Computer oben in der App. Der Befehl installiert den Agenten und startet ihn bei jedem Einschalten. Alternativ nutze die <b>Installer</b> auf der Website (Windows, Ubuntu, Raspberry).</p>
 <h3>Schritt 8 - Anpassen</h3>
 <p>Wähle im Menü, welche <b>Bereiche</b> du sehen möchtest, welche <b>Dienste</b> überwacht werden und welche <b>Alarme</b> du erhältst (mit Schwellenwerten). Optional: Aktiviere den <b>Fernneustart</b> mit einer PIN.</p>
 <h2 id="de-uso">4. So wird es benutzt</h2>
@@ -519,7 +519,7 @@ Du erhältst eine stabile Adresse wie <code>https://pc-name.deinnetz.ts.net</cod
 </ul>
 <h3>Warnungen</h3>
 <p>In der Android-App sendet die Hintergrundprüfung (etwa alle 30 Sekunden) eine Benachrichtigung bei einem Alarm: Prozessor, Last, Speicher, Swap, Datenträger oder Temperatur über deinem Schwellenwert, abnormal beendeter Dienst, plötzlich ausgeschalteter Computer oder nicht erreichbarer Server. Ein <b>normales Herunterfahren</b> eines Computers löst keine Warnung aus. Erlaube unter Android im Menü <i>ohne Akkubeschränkung</i>, damit die Prüfung nicht gestoppt wird.</p>
-<p>Auf iPhone und iPad entscheidet das System, wie oft die App prüfen darf (meist alle 15–60 Minuten). In den Computer-Apps werden Alarme nur in der App angezeigt, ohne Popups.</p>
+<p>In den Computer-Apps werden Alarme nur in der App angezeigt, ohne Popups.</p>
 <h3>Dienste: aktiv, gestoppt, abgestürzt</h3>
 <p>Der Agent unterscheidet einen <b>gestoppten</b> Dienst (normal ausgeschaltet: keine Warnung) von einem <b>abgestürzten</b> (Fehler, Absturz, Speicher erschöpft: Warnung).</p>
 <h3>Updates und Neustarts</h3>
@@ -527,7 +527,7 @@ Du erhältst eine stabile Adresse wie <code>https://pc-name.deinnetz.ts.net</cod
 <h3>Die Neustart-PIN</h3>
 <p>Beim ersten Start fragt die App, ob du deine Computer über die App neu starten können möchtest. Wenn du zustimmst, wähle eine PIN mit 4–8 Ziffern; im Menü kannst du sie ändern, zurücksetzen oder deaktivieren (<b>auf eigenes Risiko</b>: ohne PIN kann niemand Computer aus der Ferne neu starten). Nach 5 falschen PINs gilt eine Sperre von 5 Minuten. Die PIN prüft dein Server: Sie steckt nicht in der App.</p>
 <h3>Angekündigte Wartung</h3>
-<p>Um der App mitzuteilen, dass du an einem Linux- oder Mac-Computer arbeitest, schreibe einen Satz in die Datei <code>~/.config/idq-monitor-manutenzione</code>: Er erscheint in der Karte <i>Aktivität</i>. Lösche die Datei nach den Arbeiten.</p>
+<p>Um der App mitzuteilen, dass du an einem Linux-Computer arbeitest, schreibe einen Satz in die Datei <code>~/.config/idq-monitor-manutenzione</code>: Er erscheint in der Karte <i>Aktivität</i>. Lösche die Datei nach den Arbeiten.</p>
 <h3>GPU und Stromverbrauch in Watt</h3>
 <p>Die <b>GPU</b>-Karte erscheint nur, wenn der Computer eine <b>dedizierte</b> Grafikkarte hat (nicht die im Prozessor integrierte): Sie zeigt Auslastung, Grafikspeicher, Temperatur und Watt (NVIDIA mit <code>nvidia-smi</code>; AMD unter Linux).</p>
 <p>Der Bereich <b>Verbrauch (Watt)</b> zeigt die <b>Gesamtwatt</b> und getrennt die von <b>Prozessor</b> und <b>GPU</b>. Standardmäßig ist die Gesamtsumme eine Schätzung (Prozessor + GPU). Der Prozessor wird vom Energiezähler des Systems gelesen (unter Linux braucht das die bei der Installation erteilte Administratorerlaubnis).</p>
@@ -551,7 +551,7 @@ Du erhältst eine stabile Adresse wie <code>https://pc-name.deinnetz.ts.net</cod
 <li><code>porta</code>: lokaler Port, der antworten muss; <code>systemd</code>: Dienstname (Linux); <code>docker</code>: Containername; <code>docker_tutti</code>: alle Container anzeigen.</li>
 <li>Ein gerade gestarteter Dienst hat 5 Minuten Toleranz, bevor er als abnormal gilt.</li>
 </ul>
-<p>Um einen Computer zu entfernen: Agent stoppen (Linux: <code>systemctl --user disable --now idq-monitor-agente</code>; Windows: <code>Unregister-ScheduledTask -TaskName IDQMonitorAgente -Confirm:$false</code>; Mac: <code>launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/it.idq.monitor-agente.plist</code>).</p>
+<p>Um einen Computer zu entfernen: Agent stoppen (Linux: <code>systemctl --user disable --now idq-monitor-agente</code>; Windows: <code>Unregister-ScheduledTask -TaskName IDQMonitorAgente -Confirm:$false</code>).</p>
 <h2 id="de-problemi">6. Wenn etwas nicht funktioniert</h2>
 <table>
 <tr><th>Problem</th><th>Was tun</th></tr>
@@ -570,7 +570,7 @@ Du erhältst eine stabile Adresse wie <code>https://pc-name.deinnetz.ts.net</cod
 <p>IDQ Monitor User muestra en tiempo real el estado de tus ordenadores: procesador (cada núcleo), carga, memoria, swap, discos y particiones, red, temperaturas, servicios activos, actualizaciones y mantenimiento. Si algo va mal, te avisa en el móvil.</p>
 <p>Funciona con tres piezas:</p>
 <ul>
-<li><b>La app</b> (Android, iPhone y iPad, Windows, Mac, Linux y una página web) que muestra los datos.</li>
+<li><b>La app</b> (Android, Windows, Linux y una página web) que muestra los datos.</li>
 <li><b>Un servidor</b>: un ordenador siempre encendido que recoge los datos y los pone a disposición de la app, incluso fuera de casa.</li>
 <li><b>Un agente</b> en cada ordenador que quieras controlar: un pequeño programa que envía los datos al servidor.</li>
 </ul>
@@ -592,7 +592,7 @@ Du erhältst eine stabile Adresse wie <code>https://pc-name.deinnetz.ts.net</cod
 <li>Una conexión a internet. No hace falta abrir puertos en el router.</li>
 <li><b>Python 3</b> (ya presente en la mayoría de los Linux) <i>o</i> Docker.</li>
 </ul>
-<div class="nota">El servidor lee el ordenador en el que funciona (procesador, memoria, discos…). Windows y Mac se pueden <i>controlar</i> con el agente, pero el servidor debe ir en Linux.</div>
+<div class="nota">El servidor lee el ordenador en el que funciona (procesador, memoria, discos…). Windows se puede <i>controlar</i> con el agente, pero el servidor debe ir en Linux.</div>
 <div class="nota"><b>Raspberry Pi.</b> Como servidor recomendamos una Pi 4 o Pi 5 (al menos 2 GB de memoria; una Pi 3 basta para pocos ordenadores). Como ordenador a controlar, el agente funciona en todos los modelos con Raspberry Pi OS. El instalador <code>.deb</code> y la app con ventana requieren un sistema de 64 bits (Pi 5, 4, 400, 3, 3+, Zero 2 W): comprueba con <code>uname -m</code> (debe responder <code>aarch64</code>); en Pi Zero, Pi 1 y Pi 2 con sistema de 32 bits usa el comando de <i>Añadir dispositivo</i>. La app con ventana necesita el escritorio gráfico (no la versión Lite).</div>
 <h3>Paso 2 - Descarga el paquete del servidor</h3>
 <p>Desde el sitio web de IDQ Monitor User descarga <b>idq-monitor-server.zip</b> (sección <i>Descargas → Servidor</i>). En el ordenador del servidor:</p>
@@ -639,11 +639,11 @@ Obtienes una dirección estable del tipo <code>https://nombre-pc.turred.ts.net</
 <h3>Paso 7 - Añade tus ordenadores</h3>
 <p>En la app: menú → <b>Añadir dispositivo…</b>, escribe un nombre y copia el comando. En el ordenador que quieres controlar, pégalo:</p>
 <ul>
-<li><b>Linux, Raspberry, Mac</b>: en el Terminal (el comando <code>curl … | bash</code>).</li>
+<li><b>Linux, Raspberry</b>: en el Terminal (el comando <code>curl … | bash</code>).</li>
 <li><b>Windows</b>: en PowerShell (el comando <code>irm … | iex</code>).</li>
 </ul>
 <p><b>Permisos de administrador:</b> la instalación los pide en ese momento (en Windows aparece la ventana de confirmación; en Linux y Raspberry se pide la contraseña de <code>sudo</code>). Hacen falta para el reinicio remoto y para leer el consumo: solo se crea una regla limitada, y si lo rechazas el monitor funciona igualmente.</p>
-<p>En pocos segundos el ordenador aparece arriba en la app. El comando instala el agente y lo inicia en cada encendido. También puedes usar los <b>instaladores</b> del sitio web (Windows, Ubuntu, Raspberry, Mac).</p>
+<p>En pocos segundos el ordenador aparece arriba en la app. El comando instala el agente y lo inicia en cada encendido. También puedes usar los <b>instaladores</b> del sitio web (Windows, Ubuntu, Raspberry).</p>
 <h3>Paso 8 - Personaliza</h3>
 <p>Desde el menú elige qué <b>secciones</b> ver, qué <b>servicios</b> controlar y qué <b>alarmas</b> recibir (con sus umbrales). Opcional: activa el <b>reinicio remoto</b> con un PIN.</p>
 <h2 id="es-uso">4. Cómo se usa</h2>
@@ -655,7 +655,7 @@ Obtienes una dirección estable del tipo <code>https://nombre-pc.turred.ts.net</
 </ul>
 <h3>Avisos</h3>
 <p>En la app de Android el control en segundo plano (cada 30 segundos aproximadamente) envía una notificación cuando hay una alarma: procesador, carga, memoria, swap, disco o temperatura por encima del umbral que elegiste, servicio detenido de forma anómala, ordenador apagado de golpe o servidor inaccesible. Un <b>apagado normal</b> de un ordenador no genera avisos. En Android, en el menú, permite <i>sin límites de batería</i> para que el control no se detenga.</p>
-<p>En iPhone y iPad es el sistema quien decide cada cuánto puede comprobar la app (normalmente cada 15-60 minutos). En las apps de ordenador las alarmas solo se ven dentro de la app, sin ventanas emergentes.</p>
+<p>En las apps de ordenador las alarmas solo se ven dentro de la app, sin ventanas emergentes.</p>
 <h3>Servicios: activo, parado, fallido</h3>
 <p>El agente distingue un servicio <b>parado</b> (apagado con normalidad: sin aviso) de uno <b>fallido</b> de forma anómala (error, bloqueo, memoria agotada: aviso).</p>
 <h3>Actualizaciones y reinicios</h3>
@@ -663,7 +663,7 @@ Obtienes una dirección estable del tipo <code>https://nombre-pc.turred.ts.net</
 <h3>El PIN del reinicio</h3>
 <p>En el primer inicio la app pregunta si quieres poder reiniciar tus ordenadores desde la app. Si aceptas, elige un PIN de 4 a 8 cifras; desde el menú puedes cambiarlo, restablecerlo o desactivarlo (<b>bajo tu propio riesgo</b>: sin PIN nadie puede reiniciar ordenadores a distancia). Tras 5 PIN erróneos hay un bloqueo de 5 minutos. El PIN lo comprueba tu servidor: no está en la app.</p>
 <h3>Mantenimiento declarado</h3>
-<p>Para avisar a la app de que estás trabajando en un ordenador Linux o Mac, escribe una frase en el archivo <code>~/.config/idq-monitor-manutenzione</code>: aparecerá en la tarjeta <i>Actividad</i>. Borra el archivo al terminar.</p>
+<p>Para avisar a la app de que estás trabajando en un ordenador Linux, escribe una frase en el archivo <code>~/.config/idq-monitor-manutenzione</code>: aparecerá en la tarjeta <i>Actividad</i>. Borra el archivo al terminar.</p>
 <h3>GPU y consumo en vatios</h3>
 <p>La tarjeta <b>GPU</b> solo aparece si el ordenador tiene una tarjeta gráfica <b>dedicada</b> (no la integrada en el procesador): muestra uso, memoria de vídeo, temperatura y vatios (NVIDIA con <code>nvidia-smi</code>; AMD en Linux).</p>
 <p>La sección <b>Consumo (vatios)</b> muestra los <b>vatios totales</b> y, por separado, los del <b>procesador</b> y de la <b>GPU</b>. Por defecto el total es una estimación (procesador + GPU). El procesador se lee del contador de energía del sistema (en Linux hace falta el permiso de administrador dado en la instalación).</p>
@@ -687,7 +687,7 @@ Obtienes una dirección estable del tipo <code>https://nombre-pc.turred.ts.net</
 <li><code>porta</code>: puerto local que debe responder; <code>systemd</code>: nombre del servicio (Linux); <code>docker</code>: nombre del contenedor; <code>docker_tutti</code>: mostrar todos los contenedores.</li>
 <li>Un servicio recién iniciado tiene 5 minutos de margen antes de considerarse anómalo.</li>
 </ul>
-<p>Para quitar un ordenador: detén el agente (Linux: <code>systemctl --user disable --now idq-monitor-agente</code>; Windows: <code>Unregister-ScheduledTask -TaskName IDQMonitorAgente -Confirm:$false</code>; Mac: <code>launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/it.idq.monitor-agente.plist</code>).</p>
+<p>Para quitar un ordenador: detén el agente (Linux: <code>systemctl --user disable --now idq-monitor-agente</code>; Windows: <code>Unregister-ScheduledTask -TaskName IDQMonitorAgente -Confirm:$false</code>).</p>
 <h2 id="es-problemi">6. Si algo no funciona</h2>
 <table>
 <tr><th>Problema</th><th>Qué hacer</th></tr>

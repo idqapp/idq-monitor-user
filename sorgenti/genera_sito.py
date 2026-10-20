@@ -15,18 +15,13 @@ FILE = [   # (chiave etichetta, icona, file[, sottotitolo]; l'icona Android apre
  ("per_win", "win", f"downloads/{VERSIONE}/IDQ-Monitor-User-Setup-Windows.exe"),
  ("per_linux", "linux", f"downloads/{VERSIONE}/idq-monitor-user_{VERSIONE}_amd64.deb"),
  ("per_rpi", "rpi", f"downloads/{VERSIONE}/idq-monitor-user_{VERSIONE}_arm64.deb", "sub_rpi"),
- ("per_mac1", "mac", f"downloads/{VERSIONE}/IDQ-Monitor-User-macOS-arm64.zip"),
- ("per_mac2", "mac", f"downloads/{VERSIONE}/IDQ-Monitor-User-macOS-x64.zip"),
  ("per_android", "android", f"downloads/{VERSIONE}/IDQ-Monitor-User-{VERSIONE}.apk", "android"),
- ("per_ios", "ios", f"downloads/{VERSIONE}/IDQ-Monitor-User-iOS-non-firmato.ipa"),
 ]
 ICONE = {   # icone semplici disegnate a mano (nessuna risorsa esterna)
  "win": '<svg viewBox="0 0 48 48"><path d="M5 9l17-2.4V23H5zM25 6.2L43 3.5V23H25zM5 25h17v16.4L5 39zM25 25h18v19.6L25 42z"/></svg>',
  "linux": '<svg viewBox="0 0 48 48"><rect x="4" y="8" width="40" height="32" rx="5" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M12 19l8 5-8 5M24 31h12" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
  "rpi": '<svg viewBox="0 0 48 48"><circle cx="17" cy="27" r="7"/><circle cx="31" cy="27" r="7"/><circle cx="24" cy="35" r="7"/><circle cx="24" cy="21" r="7"/><path d="M24 14c-1-5-5-8-9-8 1 5 4 8 9 8zM24 14c1-5 5-8 9-8-1 5-4 8-9 8z"/></svg>',
- "mac": '<svg viewBox="0 0 48 48"><path d="M33 25c0-4 3-6 3-6-2-3-5-3-6-3-2 0-4 1-5 1s-3-1-5-1c-4 0-8 3-8 9 0 7 5 14 8 14 2 0 3-1 5-1s3 1 5 1c3 0 7-6 7-9 0 0-4-2-4-5zM29 12c1-1 2-3 2-5-2 0-4 1-5 3-1 1-2 3-2 5 2 0 4-1 5-3z"/></svg>',
  "android": '<svg viewBox="0 0 48 48"><path d="M9 32a15 15 0 0130 0zM15 10l3 5M33 10l-3 5" fill="currentColor" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="19" cy="25" r="1.8" fill="#fff"/><circle cx="29" cy="25" r="1.8" fill="#fff"/></svg>',
- "ios": '<svg viewBox="0 0 48 48"><rect x="13" y="3" width="22" height="42" rx="5" fill="none" stroke="currentColor" stroke-width="3.5"/><rect x="20" y="7" width="8" height="2.5" rx="1.2"/><circle cx="24" cy="39.5" r="2"/></svg>',
  "guida": '<svg viewBox="0 0 48 48"><path d="M8 7h15c3 0 5 2 5 5v30c0-2-2-4-5-4H8zM40 7H25c-3 0-5 2-5 5v30c0-2 2-4 5-4h15z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/></svg>',
  "srv": '<svg viewBox="0 0 48 48"><rect x="6" y="6" width="36" height="13" rx="3"/><rect x="6" y="24" width="36" height="13" rx="3"/><circle cx="13" cy="12.5" r="2" fill="#fff"/><circle cx="13" cy="30.5" r="2" fill="#fff"/><path d="M24 37v6M16 43h16" stroke="currentColor" stroke-width="3" fill="none"/></svg>',
 }
@@ -99,7 +94,7 @@ def indice():
         chiave, icona, percorso = voce[:3]; sub = ('<small class="sub">%s</small>' % L(voce[3])) if len(voce) > 3 and voce[3] != 'android' else ''
         if False: pass
         else: h += '<a class="os" href="%s" download="%s"%s>%s<span class="et">%s</span>%s<small>%s</small></a>' % (percorso, os.path.basename(percorso), ' data-and="1"' if icona == "android" else "", ICONE[icona], L(chiave), sub, mb(percorso))
-    h += '</div><details class="note"><summary>%s</summary>%s</details>' % (L("note_inst"), "".join('<p><b>%s</b>: %s</p>' % (L(c), L(n)) for c, n in (("per_win", "n_win"), ("per_linux", "n_deb"), ("per_rpi", "n_rpi"), ("per_mac1", "n_mac"), ("per_ios", "n_ios"), ("per_srv", "n_srv"))))
+    h += '</div><details class="note"><summary>%s</summary>%s</details>' % (L("note_inst"), "".join('<p><b>%s</b>: %s</p>' % (L(c), L(n)) for c, n in (("per_win", "n_win"), ("per_linux", "n_deb"), ("per_rpi", "n_rpi"), ("per_srv", "n_srv"))))
     srv_tile = '<a class="os" href="downloads/idq-monitor-server.zip" download="idq-monitor-server.zip">%s<span class="et">%s</span><small class="sub">%s</small><small>%s</small></a>' % (ICONE["srv"], L("per_srv"), L("sub_srv"), mb("downloads/idq-monitor-server.zip"))
     guida_tile = '<a class="os guida" data-g="guida.html" href="guida.html">%s<span class="et">%s</span><small class="sub">%s</small></a>' % (ICONE["guida"], L("per_guida"), L("sub_guida"))
     h += '<h2 id="server">%s</h2><p>%s</p><div class="os-grid">%s%s</div>' % (L("h_server"), L("p_server"), srv_tile, guida_tile)
